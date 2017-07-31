@@ -9,9 +9,9 @@ public class User implements Serializable {
 	private int id;
 	private String login_id;
 	private String name;
-	private String branch_id;
+	private int branch_id;
 	private String password;
-	private String position_id;
+	private int position_id;
 	private Date is_working;
 
 	public int getId() {
@@ -38,11 +38,11 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public String getBranch_id() {
+	public int getBranch_id() {
 		return branch_id;
 	}
 
-	public void setBranch_id(String branch_id) {
+	public void setBranch_id(int branch_id) {
 		this.branch_id = branch_id;
 	}
 
@@ -54,11 +54,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getPosition_id() {
+	public int getPosition_id() {
 		return position_id;
 	}
 
-	public void setPosition_id(String position_id) {
+	public void setPosition_id(int position_id) {
 		this.position_id = position_id;
 	}
 
@@ -68,5 +68,20 @@ public class User implements Serializable {
 
 	public void setIs_working(Date is_working) {
 		this.is_working = is_working;
+	}
+
+	public void setBranch_id(String parameter) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	public void setPosition_id(String parameter) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	public static int getUser_id() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
 	}
 }

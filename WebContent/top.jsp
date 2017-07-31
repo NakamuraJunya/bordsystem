@@ -7,24 +7,56 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>簡易Twitter</title>
+	<title>掲示板</title>
 </head>
 <body>
-<div class="main-contents">
-
 <div class="header">
-	<c:if test="${ empty loginUser }">
-		<a href="login">ログイン</a>
-		<a href="signup">登録する</a>
-    </c:if>
-	<c:if test="${ not empty loginUser }">
 		<a href="./">ホーム</a>
-		<a href="settings">設定</a>
+		<a href="settings">ユーザー編集</a>
+		<a href="newmessage">新規投稿</a>
 		<a href="logout">ログアウト</a>
-	</c:if>
+
 </div>
+<p><p/>
+<div class="profile">
+<span class="name"><c:out value="${loginUser.name}" />がログイン中です</span>
+
+</div>
+
+<p><font size="5">商売繁盛掲示板</font></p>
+
+<div class="messages">
+<div class="account-name">
+		<c:forEach items = "${messages}" var = "message">
+
+				【件名】：<span class="title"><c:out value="${message.title}" /></span><br/><p><p/>
+
+				【カテゴリー】：<span class="category"><c:out value="${message.category}" /></span><br/><p><p/>
+
+				【本文】:<div class="text"><c:out value="${message.text}" /></div><br/>
+
+				【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
+
+				【投稿日時】：<span class="created_at"><fmt:formatDate value="${message.created_at}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/>
+	<p><p/>
+	<div class="form-area">
+	<c:if test="${ isShowMessageForm }">
+		<form action="newMessage" method="post">
+			コメントしてみよう！<br />
+			<textarea name="message" cols="100" rows="5" class="tweet-box"></textarea>
+			<br />
+			<input type="submit" value="コメント">（500文字まで）
+		</form>
+	</c:if>
+	<p><p/>
+</div>
+
+	</c:forEach>
+	</div>
+</div>
+
 
 <div class="copyright">Copyright(c)Junya Nakamura</div>
-</div>
+
 </body>
 </html>

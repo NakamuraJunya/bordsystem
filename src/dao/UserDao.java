@@ -12,7 +12,7 @@ import java.util.List;
 import beans.User;
 import exception.SQLRuntimeException;
 
-public class UserDao {
+public class UserDao<UserMessage> {
 
 	public User getUser(Connection connection, String login_id,
 			String password) {
@@ -48,9 +48,9 @@ public class UserDao {
 				int id = rs.getInt("id");
 				String login_id = rs.getString("login_id");
 				String name = rs.getString("name");
-				String branch_id = rs.getString("branch_id");
+				int branch_id = rs.getInt("branch_id");
 				String password = rs.getString("password");
-				String position_id = rs.getString("position_id");
+				int position_id = rs.getInt("position_id");
 
 				User user = new User();
 				user.setId(id);
@@ -94,8 +94,8 @@ public class UserDao {
 			ps.setString(1, users.getLogin_id());
 			ps.setString(2, users.getPassword());
 			ps.setString(3, users.getName());
-			ps.setString(4, users.getBranch_id());
-			ps.setString(5, users.getPosition_id());
+			ps.setInt(4, users.getBranch_id());
+			ps.setInt(5, users.getPosition_id());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

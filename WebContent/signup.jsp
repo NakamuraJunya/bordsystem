@@ -32,19 +32,17 @@
 	<input name="password"value="${user.password}" type="password" id="password"/> <br />
 
 	<label for="branch_id">支店</label>
-	<select>
+	<select id="branch_id" name="branch_id">
 	<option >カテゴリーを入力してください</option>
-
-
-	<option value="1">本社</option>
-	<option value="2">総務</option>
+	<option value="0">本社</option>
+	<option value="1">総務</option>
 	</select>
 
 	<label for="position_id">役職・部署</label>
-	<select>
+	<select id="position_id" name="position_id">
 	<option >カテゴリーを入力してください</option>
-	<option value="1">総務人事担当者</option>
-	<option value="2">情報管理担当者</option>
+	<option value="0">総務人事担当者</option>
+	<option value="1">情報管理担当者</option>
 	</select>
 
 	<input type="submit" value="登録" /> <br />
