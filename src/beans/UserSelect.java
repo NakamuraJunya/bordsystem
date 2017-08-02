@@ -2,30 +2,22 @@ package beans;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class UserSelect implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private int branch_id;
-	private int position_id;
-	private int user_id;
-	private int is_working;
 	private String login_id;
 	private String name;
+	private int branch_id;
 	private String password;
-
+	private int position_id;
+	private int is_working;
 
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
 	}
 	public String getLogin_id() {
 		return login_id;

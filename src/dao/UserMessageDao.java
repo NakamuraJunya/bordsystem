@@ -41,6 +41,7 @@ public class UserMessageDao {
 		List<UserMessage> ret = new ArrayList<UserMessage>();
 		try {
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				int user_id = rs.getInt("user_id");
 				int branch_id = rs.getInt("branch_id");
 				int position_id = rs.getInt("position_id");
@@ -51,6 +52,7 @@ public class UserMessageDao {
 				Timestamp created_at = rs.getTimestamp("created_at");
 
 				UserMessage message = new UserMessage();
+				message.setId(id);
 				message.setUser_id(user_id);
 				message.setBranch_id(branch_id);
 				message.setPosition_id(position_id);

@@ -17,7 +17,8 @@ public class MessageDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO messages ( ");
-			sql.append(" user_id");
+			sql.append(" id");
+			sql.append(", user_id");
 			sql.append(", branch_id");
 			sql.append(", position_id");
 			sql.append(", title");
@@ -25,7 +26,8 @@ public class MessageDao {
 			sql.append(", category");
 			sql.append(", created_at");
 			sql.append(") VALUES (");
-			sql.append(" ?"); // user_id
+			sql.append("?"); // category
+			sql.append(", ?"); // user_id
 			sql.append(", ?"); // branch_id
 			sql.append(", ?"); // position_id
 			sql.append(", ?"); // title
@@ -36,12 +38,13 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, messages.getUser_id());
-			ps.setInt(2, messages.getBranch_id());
-			ps.setInt(3, messages.getPosition_id());
-			ps.setString(4, messages.getTitle());
-			ps.setString(5, messages.getText());
-			ps.setString(6, messages.getCategory());
+			ps.setInt(1, messages.getId());
+			ps.setInt(2, messages.getUser_id());
+			ps.setInt(3, messages.getBranch_id());
+			ps.setInt(4, messages.getPosition_id());
+			ps.setString(5, messages.getTitle());
+			ps.setString(6, messages.getText());
+			ps.setString(7, messages.getCategory());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

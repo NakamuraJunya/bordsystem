@@ -36,24 +36,26 @@ public class NewMessageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		List<String> messages = new ArrayList<String>();
+		User users = (User) session.getAttribute("loginUser");
+
+		Message message = new Message();
+		message.setTitle(request.getParameter("title"));
+		message.setText(request.getParameter("text"));
+		message.setCategory(request.getParameter("category"));
+		message.setUser_id(users.getId());
+		message.setBranch_id(users.getBranch_id());
+		message.setPosition_id(users.getPosition_id());
 
 		if (isValid(request, messages) == true) {
-
-			User users = (User) session.getAttribute("loginUser");
-
-			Message message = new Message();
-			message.setTitle(request.getParameter("title"));
-			message.setText(request.getParameter("text"));
-			message.setCategory(request.getParameter("category"));
-			message.setUser_id(users.getId());
-			message.setBranch_id(users.getBranch_id());
-			message.setPosition_id(users.getPosition_id());
 
 			new MessageService().register(message);
 
 			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
+
+			request.setAttribute("makeMessage", message);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/newmessage.jsp");
 			dispatcher.forward(request,response);
 		}

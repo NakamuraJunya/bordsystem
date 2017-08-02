@@ -11,22 +11,20 @@
 </head>
 <body>
 <div class="header">
-		<a href="./">ホーム</a>
-		<a href="settings">ユーザー編集</a>
+		<a href="usermanagement">ユーザー管理画面</a>
 		<a href="newmessage">新規投稿</a>
 		<a href="logout">ログアウト</a>
 
 </div>
 <p><p/>
 <div class="profile">
-<span class="name"><c:out value="${loginUser.name}" />がログイン中です</span>
+ようこそ<span class="name"><c:out value="${loginUser.name}" />さん</span>
 
 </div>
 
 <p><font size="5">商売繁盛掲示板</font></p>
 
 <div class="messages">
-<div class="account-name">
 		<c:forEach items = "${messages}" var = "message">
 
 				【件名】：<span class="title"><c:out value="${message.title}" /></span><br/><p><p/>
@@ -53,8 +51,6 @@
 
 	</c:forEach>
 	</div>
-</div>
-
 
 <div class="copyright">Copyright(c)Junya Nakamura</div>
 

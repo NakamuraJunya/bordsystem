@@ -12,7 +12,7 @@ import java.util.List;
 import beans.User;
 import exception.SQLRuntimeException;
 
-public class UserDao<UserMessage> {
+public class UserDao {
 
 	public User getUser(Connection connection, String login_id,
 			String password) {
@@ -45,20 +45,22 @@ public class UserDao<UserMessage> {
 		List<User> ret = new ArrayList<User>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id= rs.getInt("id");
 				String login_id = rs.getString("login_id");
-				String name = rs.getString("name");
 				int branch_id = rs.getInt("branch_id");
-				String password = rs.getString("password");
 				int position_id = rs.getInt("position_id");
+				int is_working = rs.getInt("is_working");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
 
 				User user = new User();
 				user.setId(id);
 				user.setLogin_id(login_id);
-				user.setName(name);
 				user.setBranch_id(branch_id);
-				user.setPassword(password);
 				user.setPosition_id(position_id);
+				user.setIs_working(is_working);
+				user.setName(name);
+				user.setPassword(password);
 
 				ret.add(user);
 			}
@@ -98,6 +100,60 @@ public class UserDao<UserMessage> {
 			ps.setInt(5, users.getPosition_id());
 
 			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+		public void update(Connection connection, User users) {
+
+			PreparedStatement ps = null;
+			try {
+				StringBuilder sql = new StringBuilder();
+				sql.append("UPDATE user SET");
+				sql.append("  login_id = ?");
+				sql.append(", password = ?");
+				sql.append(", name = ?");
+				sql.append(", branch_id = ?");
+				sql.append(", position_id = ?");
+				sql.append(", is_working = CURRENT_TIMESTAMP");
+				sql.append(" WHERE");
+				sql.append(" id = ?");
+				sql.append(" AND");
+				sql.append(" is_working = ?");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setString(3, users.getLogin_id());
+				ps.setString(4, users.getPassword());
+				ps.setString(2, users.getName());
+				ps.setInt(4, users.getBranch_id());
+				ps.setInt(5, users.getPosition_id());
+				ps.setInt(6, users.getId());
+
+				ps.executeUpdate();
+
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+		}
+	public List<User> getUsers(Connection connection, int limitNum) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users";
+
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else {
+				return userList;
+			}
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

@@ -32,14 +32,14 @@
 
 <p class="form-item">
 <label for="title">件名</label>
-<input name="title"value="${user.title}" id="title"/><br />
+<input name="title"value="${makeMessage.title}" id="title"/><br />
 
 <label for="category">カテゴリー</label>
-<input name="category"value="${user.category}" id="category"/><br />
+<input name="category"value="${makeMessage.category}" id="category"/><br />
 
-<label for="category">本文</label>
+<label for="text">本文</label>
 <br />
-<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+<textarea name="text" cols="100" rows="5" class="tweet-box">${makeMessage.text}</textarea>
 <br />
 <input type="submit" value="投稿">（1000文字まで）
 </form>

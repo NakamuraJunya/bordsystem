@@ -6,6 +6,7 @@ import java.util.Date;
 public class UserMessage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private int id;
 	private int user_id;
 	private int branch_id;
 	private int position_id;
@@ -15,6 +16,13 @@ public class UserMessage implements Serializable {
 	private String name;
 	private Date created_at;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getUser_id() {
 		return user_id;
 	}

@@ -6,10 +6,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ユーザー登録</title>
+	<title>ユーザー編集画面</title>
 </head>
 <body>
-<div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -20,27 +19,26 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<form action="signup" method="post"><br />
-	<label for="name">名前</label>
-	<input name="name" value="${user.name}" id="name"/><br />
 
-	<label for="login_id">ログインID</label>
-	<input name="login_id"value="${user.login_id}" id="login_id"/><br />
+	<label for="name">名前</label>
+	<input name="name" value="${name}" /><br />
+
+	<label for="login_id">アカウント名</label>
+	<input name="login_id" value="${login_id}" /><br />
 
 	<label for="password">パスワード</label>
+	<input name="password" type="password" id="password"/> <br />
 
-	<input name="password"value="${user.password}" type="password" id="password"/> <br />
-
-	<label for="branch_id">支店</label>
-	<input name="branch_id"value="${user.branch_id}"id="branch_id"/> <br />
+	<label for="branch_id">支店名</label>
+	<input name="branch_id" value="${branch_id}" id="branch_id"/> <br />
 
 	<label for="position_id">役職・部署</label>
-    <input name="position_id"value="${user.position_id}"id="position_id"/> <br />
+	<input name="position_id" value="${position_id}" id="position_id"/> <br />
 
 	<input type="submit" value="登録" /> <br />
 	<a href="./">戻る</a>
-</form>
+
 <div class="copyright">Copyright(c)Junya Nakamura</div>
-</div>
+
 </body>
 </html>
