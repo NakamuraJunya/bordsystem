@@ -9,6 +9,7 @@
 	<title>ユーザー登録</title>
 </head>
 <body>
+<font size="5">ユーザー登録画面</font>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

@@ -31,10 +31,7 @@ public class TopServlet extends HttpServlet {
 
 		request.setAttribute("messages", messages);
 
-		System.out.println(users.getId());
-
 		request.setAttribute("isShowMessageForm", isShowMessageForm);
-
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

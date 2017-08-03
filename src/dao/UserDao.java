@@ -111,26 +111,25 @@ public class UserDao {
 			PreparedStatement ps = null;
 			try {
 				StringBuilder sql = new StringBuilder();
-				sql.append("UPDATE user SET");
+				sql.append("UPDATE users SET");
 				sql.append("  login_id = ?");
 				sql.append(", password = ?");
 				sql.append(", name = ?");
 				sql.append(", branch_id = ?");
 				sql.append(", position_id = ?");
-				sql.append(", is_working = CURRENT_TIMESTAMP");
 				sql.append(" WHERE");
 				sql.append(" id = ?");
-				sql.append(" AND");
-				sql.append(" is_working = ?");
 
 				ps = connection.prepareStatement(sql.toString());
 
-				ps.setString(3, users.getLogin_id());
-				ps.setString(4, users.getPassword());
-				ps.setString(2, users.getName());
+				ps.setString(1, users.getLogin_id());
+				ps.setString(2, users.getPassword());
+				ps.setString(3, users.getName());
 				ps.setInt(4, users.getBranch_id());
 				ps.setInt(5, users.getPosition_id());
 				ps.setInt(6, users.getId());
+
+				System.out.println(ps.toString());
 
 				ps.executeUpdate();
 
@@ -153,6 +152,29 @@ public class UserDao {
 				return null;
 			} else {
 				return userList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
+	public User getUser(Connection connection, int id) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else {
+				return userList.get(0);
 			}
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);

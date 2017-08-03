@@ -10,50 +10,56 @@
     <title>ユーザー管理</title>
 </head>
 <body>
-<div class="header">
-	<a href="./">ホーム</a>
-	<a href="settings">ユーザー編集</a>
-	<a href="logout">ログアウト</a>
-</div>
+	<div class="header">
+		<a href="./">ホーム</a>
+		<a href="logout">ログアウト</a>
+	</div>
+	<p></p>
+	<div class="profile">
+		ようこそ<span class="name"><c:out value="${loginUser.name}" /> さん</span>
+	</div>
+	<p></p>
+	<font size="5">ユーザー管理画面</font>
 
-<div class="profile">
-ようこそ<span class="name"><c:out value="${loginUser.name}" /> さん</span>
-</div>
+	<table border=1>
+		<tr>
+		<th>【名前】</th>
+		<th>【ログインID】</th>
+		<th>【支店名】</th>
+		<th>【部署・役職】</th>
+		</tr>
+		<tr>
+			<c:forEach items="${users}" var="user">
 
-<font size="5">ユーザー管理画面</font>
-<table>
-<tr>
-<th>【名前】</th>
-<th>【ログインID】</th>
-<th>【支店名】</th>
-<th>【部署・役職】</th>
-</tr>
-<tr>
-				<c:forEach items="${users}" var="user">
-					<td><c:out value="${user.name}" /></td>
+				<td><c:out value="${user.name}" />
 
-					<td><c:out value="${user.login_id}" /></td>
+				<td><c:out value="${user.login_id}" /></td>
 
-                <c:forEach items="${Branches}" var="branch">
-				<c:if test="${user.branch_id == branch.id}">
+        		<c:forEach items="${Branches}" var="branch">
+					<c:if test="${user.branch_id == branch.id}">
 					<td><c:out value="${branch.name}" /></td>
-				</c:if>
+					</c:if>
 				</c:forEach>
 
-                <c:forEach items="${Positions}" var="position">
-				<c:if test="${user.position_id == position.id}">
+            	<c:forEach items="${Positions}" var="position">
+					<c:if test="${user.position_id == position.id}">
 					<td><c:out value="${position.name}" /></td>
-				</c:if>
+					</c:if>
 				</c:forEach>
-				</c:forEach>
+				<td>
+					<form action = "settings" method = "get" enctype ="multipart/form-date">
+						<button type="submit" name="id" value="${user.id}">編集</button>
+					</form>
+				</td>
+					<td><input type="submit" value="復活・停止" /> <br /></td>
+					<tr></tr>
+		 	 </c:forEach>
 
-			<td><input type="submit" value="編集" /> <br /></td>
+		</tr>
 
-			<td><input type="submit" value="復活・停止" /> <br /></td>
+	</table>
 
-</tr>
-
-</table>
+	<p></p>
+	<div class="copyright">Copyright(c)Junya Nakamura</div>
 </body>
-<div class="copyright">Copyright(c)Junya Nakamura</div>
 </html>

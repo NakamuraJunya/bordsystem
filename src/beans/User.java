@@ -60,7 +60,7 @@ public class User implements Serializable {
 	public int getIs_working() {
 		return is_working;
 	}
-	public void setIs_working(int is_working) {
-		this.is_working = is_working;
+	public void setIs_working(int is_working2) {
+		this.is_working = is_working2;
 	}
 }

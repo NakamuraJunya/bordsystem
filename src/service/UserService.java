@@ -84,4 +84,28 @@ public class UserService {
 			close(connection);
 		}
 	}
+
+	public User getUser(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao UserDao = new UserDao();
+			User user = UserDao
+					.getUser(connection, id);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
