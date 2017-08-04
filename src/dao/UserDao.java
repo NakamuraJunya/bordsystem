@@ -139,6 +139,30 @@ public class UserDao {
 				close(ps);
 			}
 		}
+		public void is_Woking(Connection connection, int id,int isWorking) {
+
+			PreparedStatement ps = null;
+			try {
+				StringBuilder sql = new StringBuilder();
+				sql.append("UPDATE users SET");
+				sql.append("is_working = ?");
+				sql.append(" WHERE");
+				sql.append(" id = ?");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setInt(1,isWorking);
+				ps.setInt(2,id);
+
+				ps.executeUpdate();
+
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+		}
+
 	public List<User> getUsers(Connection connection, int limitNum) {
 		PreparedStatement ps = null;
 		try {

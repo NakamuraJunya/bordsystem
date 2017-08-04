@@ -60,6 +60,27 @@ public class UserService {
 		}
 	}
 
+	public void is_Woking(int id,int isWorking) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			userDao.is_Woking(connection, id,isWorking);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	private static final int LIMIT_NUM = 1000;
 
 	public List<User> getUsers() {
