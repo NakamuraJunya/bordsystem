@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -10,11 +11,24 @@ public class User implements Serializable {
 	private int position_id;
 	private int user_id;
 	private int is_working;
+	private int message_id;
 	private String login_id;
 	private String name;
 	private String password;
+	private Date created_at;
 
-
+	public int getMessage_id() {
+		return message_id;
+	}
+	public void setMessage_id(int message_id) {
+		this.message_id = message_id;
+	}
+	public Date getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
 	public int getId() {
 		return id;
 	}

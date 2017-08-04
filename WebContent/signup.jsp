@@ -6,9 +6,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ユーザー登録</title>
+	<title>ユーザー登録画面</title>
 </head>
 <body>
+<a href="usermanagement">ユーザー管理画面に戻る</a>
+<p></p>
 <font size="5">ユーザー登録画面</font>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
@@ -24,22 +26,32 @@
 <form action="signup" method="post"><br />
 	<label for="name">名前</label>
 	<input name="name" value="${user.name}" id="name"/><br />
-
+<p></p>
 	<label for="login_id">ログインID</label>
 	<input name="login_id"value="${user.login_id}" id="login_id"/><br />
-
+<p></p>
 	<label for="password">パスワード</label>
 
 	<input name="password"value="${user.password}" type="password" id="password"/> <br />
+<p></p>
+支店名
+<select name = "selectBranch">
+    	<c:forEach items="${Branches}" var="branch">
+					<option value="${branch.id}">${branch.name}</option>
+			</c:forEach>
+</select>
+<p></p>
+部署・役職
+<select name = "selectPosition">
+    	<c:forEach items="${Positions}" var="position">
+					<option value="${position.id}">${position.name}</option>
 
-	<label for="branch_id">支店</label>
-	<input name="branch_id"value="${user.branch_id}"id="branch_id"/> <br />
+			</c:forEach>
+</select>
 
-	<label for="position_id">役職・部署</label>
-    <input name="position_id"value="${user.position_id}"id="position_id"/> <br />
-
+<p></p>
 	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
+<p></p>
 </form>
 <div class="copyright">Copyright(c)Junya Nakamura</div>
 </div>

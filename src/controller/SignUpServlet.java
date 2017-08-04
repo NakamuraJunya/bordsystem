@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import beans.Branch;
+import beans.Position;
 import beans.User;
+import service.BranchService;
+import service.PositionService;
 import service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
@@ -24,6 +28,14 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
+		List<Branch> Branch = new BranchService().getBranch();
+
+		request.setAttribute("Branches", Branch);
+
+		List<Position> Position = new PositionService().getPosition();
+
+		request.setAttribute("Positions", Position);
 
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
@@ -41,8 +53,8 @@ public class SignUpServlet extends HttpServlet {
 			user.setName(request.getParameter("name"));
 			user.setLogin_id(request.getParameter("login_id"));
 			user.setPassword(request.getParameter("password"));
-			user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-			user.setPosition_id(Integer.parseInt(request.getParameter("position_id")));
+			user.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
+			user.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
 
 			new UserService().register(user);
 
@@ -52,8 +64,8 @@ public class SignUpServlet extends HttpServlet {
 			User user = new User();
 			user.setName(request.getParameter("name"));
 			user.setLogin_id(request.getParameter("login_id"));
-			user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-			user.setPosition_id(Integer.parseInt(request.getParameter("position_id")));
+			user.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
+			user.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
 			request.setAttribute("users", user);
 
 			session.setAttribute("errorMessages", messages);

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.User;
+import beans.UserComment;
 import beans.UserMessage;
+import service.CommentService;
 import service.MessageService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
@@ -28,8 +30,10 @@ public class TopServlet extends HttpServlet {
 			isShowMessageForm = false;
 		}
 		List<UserMessage> messages = new MessageService().getMessage();
+		List<UserComment> comments = new CommentService().getComment();
 
 		request.setAttribute("messages", messages);
+		request.setAttribute("comments", comments);
 
 		request.setAttribute("isShowMessageForm", isShowMessageForm);
 

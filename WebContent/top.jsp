@@ -10,46 +10,63 @@
 	<title>掲示板</title>
 </head>
 <body>
-<div class="header">
+	<div class="header">
 		<a href="usermanagement">ユーザー管理画面</a>
-		<a href="newmessage">新規投稿</a>
+		<a href="newmessage">新規投稿画面</a>
 		<a href="logout">ログアウト</a>
+	</div>
+	<p><p/>
+	<div class="profile">
+		現在、<span class="name"><c:out value="${loginUser.name}" />でログイン中です</span>
+	</div>
+	<p><font size="5">商売繁盛掲示板</font></p>
 
-</div>
-<p><p/>
-<div class="profile">
-ようこそ<span class="name"><c:out value="${loginUser.name}" />さん</span>
+	<div class="messages">
 
-</div>
-
-<p><font size="5">商売繁盛掲示板</font></p>
-
-<div class="messages">
 		<c:forEach items = "${messages}" var = "message">
 
-				【件名】：<span class="title"><c:out value="${message.title}" /></span><br/><p><p/>
+		【件名】：<span class="title"><c:out value="${message.title}" /></span><br/><p><p/>
 
-				【カテゴリー】：<span class="category"><c:out value="${message.category}" /></span><br/><p><p/>
+		【カテゴリー】：<span class="category"><c:out value="${message.category}" /></span><br/><p><p/>
 
-				【本文】:<div class="text"><c:out value="${message.text}" /></div><br/>
+		【本文】:<div class="text"><c:out value="${message.text}" /></div><br/>
 
-				【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
+		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
 
-				【投稿日時】：<span class="created_at"><fmt:formatDate value="${message.created_at}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/>
-	<p><p/>
-	<div class="form-area">
-	<c:if test="${ isShowMessageForm }">
-		<form action="newMessage" method="post">
-			コメントしてみよう！<br />
-			<textarea name="message" cols="100" rows="5" class="tweet-box"></textarea>
-			<br />
-			<input type="submit" value="コメント">（500文字まで）
-		</form>
-	</c:if>
-	<p><p/>
-</div>
+		【投稿日時】：<span class="created_at"><fmt:formatDate value="${message.created_at}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 
-	</c:forEach>
+		【コメント】<div class="text"><c:out value="${makeComment.text}" /></div><br/>
+
+        <div class="form-area">
+		<form action="newcomment" method="post">
+			<c:forEach items="${comments}" var="comment">
+				<c:if test="${message.id == comment.message_id}">
+				<span class ="text"> <c:out value ="${comment.text}"/></span><br/><p><p/>
+				</c:if>
+			</c:forEach>
+
+			<c:forEach items="${Branches}" var="branch">
+				<c:if test="${user.branch_id ==comments.branch.id}">
+					<td>><span class="branch.id"><c:out value="${branch.id}"/></span></td>
+				</c:if>
+			</c:forEach>
+
+			<c:forEach items="${Positions}" var="position">
+				<c:if test="${user.position_id == comments.position.id}">
+				<td><span class="position.id"><c:out value="${position.id}" /></span></td>
+				</c:if>
+			</c:forEach>
+         <br />
+
+【コメント入力スペース】
+         <input type = hidden name="message_id" value="${message.id}">
+         <textarea name="text" cols="100" rows="5" class="tweet-box">${makeComment.text}</textarea>
+         <p></p>
+         <button name="user_id" value="${loginUser.id}">コメント</button>
+         </form>
+         </div>
+			<p><p/>
+   		</c:forEach>
 	</div>
 
 <div class="copyright">Copyright(c)Junya Nakamura</div>

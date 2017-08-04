@@ -12,6 +12,8 @@
 <body>
 <div class="main-contents">
 
+<p><font size="5">商売繁盛掲示板</font></p>
+
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -31,9 +33,9 @@
 	<input name="password" type="password" id="password"/> <br />
 
 	<input type="submit" value="ログイン" /> <br />
-	<a href="./">戻る</a>
 </form>
-<div class="copyright">Copyright(c)Satoshi Kimura</div>
+<p></p>
+<div class="copyright">Copyright(c)Junya Nakamura</div>
 </div>
 </body>
 </html>

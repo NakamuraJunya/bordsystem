@@ -65,6 +65,7 @@ public class SettingsServlet extends HttpServlet {
 				session.removeAttribute("editUser");
 				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 				session.setAttribute("errorMessages", messages);
+				System.out.println("aaaa");
 				response.sendRedirect("settings");
 			}
 
@@ -74,6 +75,7 @@ public class SettingsServlet extends HttpServlet {
 			response.sendRedirect("usermanagement");
 		} else {
 			session.setAttribute("errorMessages", messages);
+			System.out.println("aaa");
 			response.sendRedirect("settings");
 		}
 	}
@@ -87,8 +89,8 @@ public class SettingsServlet extends HttpServlet {
 		editUser.setName(request.getParameter("name"));
 		editUser.setLogin_id(request.getParameter("login_id"));
 		editUser.setPassword(request.getParameter("password"));
-		editUser.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		editUser.setPosition_id(Integer.parseInt(request.getParameter("position_id")));
+		editUser.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
+		editUser.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
 		return editUser;
 	}
 
@@ -97,8 +99,8 @@ public class SettingsServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("login_id");
 		String password = request.getParameter("password");
-		String branch_id = request.getParameter("branch_id");
-		String position_id = request.getParameter("position_id");
+		String branch_id = request.getParameter("selectBranch");
+		String position_id = request.getParameter("selectPosition");
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");

@@ -12,11 +12,12 @@
 <body>
 	<div class="header">
 		<a href="./">ホーム</a>
+		<a href="signup">新規ユーザー登録</a>
 		<a href="logout">ログアウト</a>
 	</div>
 	<p></p>
 	<div class="profile">
-		ようこそ<span class="name"><c:out value="${loginUser.name}" /> さん</span>
+		現在、<span class="name"><c:out value="${loginUser.name}" /> でログイン中です</span>
 	</div>
 	<p></p>
 	<font size="5">ユーザー管理画面</font>
@@ -47,12 +48,14 @@
 					</c:if>
 				</c:forEach>
 				<td>
-					<form action = "settings" method = "get" enctype ="multipart/form-date">
+					<form action = "settings" method = "get" >
 						<button type="submit" name="id" value="${user.id}">編集</button>
 					</form>
 				</td>
-					<td><input type="submit" value="復活・停止" /> <br /></td>
+					<form action = "settings" method = "get" >
+					<td><input type="submit" value="復活" /> <br /></td>
 					<tr></tr>
+					</form>
 		 	 </c:forEach>
 
 		</tr>

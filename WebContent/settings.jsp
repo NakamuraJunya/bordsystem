@@ -10,7 +10,7 @@
 </head>
 <body>
 <p></p>
-	<a href="./">ユーザー管理画面</a>
+	<a href="usermanagement">ユーザー管理画面に戻る</a>
 	<p></p>
 <font size="5">ユーザー編集画面</font>
 <c:if test="${ not empty errorMessages }">
@@ -26,26 +26,36 @@
 <form action = settings  method = "post" enctype ="multipart/form-date"><br/>
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}" /><br />
-
+<p></p>
 	<label for="login_id">ログインID</label>
 	<input name="login_id" value="${editUser.login_id}" /><br />
-
+<p></p>
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
-
+<p></p>
 	<label for="password">パスワード確認</label>
 	<input name="password" type="password" id="password"/> <br />
+<p></p>
+支店名
+<select name = "selectBranch">
+    	<c:forEach items="${Branches}" var="branch">
+				<option value="${branch.id}">${branch.name}</option>
+			</c:forEach>
+</select>
+<p></p>
+部署・役職
+<select name = "selectPosition">
+    	<c:forEach items="${Positions}" var="position">
+					<option value="${position.id}">${position.name}</option>
 
-    <label for="branch_id">支店名:</label>
-	  <input name="branch_id"value="${editUser.branch_id}"id="branch_id"/> <br />
-
-    <label for="position_id">部署・役職:</label>
- 	<input name="position_id"value="${editUser.position_id}"id="position_id"/> <br />
+			</c:forEach>
+</select>
 
 	<button type="submit" name="id" value="${editUser.id}">変更</button>
 
 </form>
 <p></p>
+
 <div class="copyright">Copyright(c)Junya Nakamura</div>
 
 </body>
