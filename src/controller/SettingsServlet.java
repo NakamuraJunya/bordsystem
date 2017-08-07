@@ -65,7 +65,6 @@ public class SettingsServlet extends HttpServlet {
 				session.removeAttribute("editUser");
 				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 				session.setAttribute("errorMessages", messages);
-				System.out.println("aaaa");
 				response.sendRedirect("settings");
 			}
 
@@ -75,7 +74,6 @@ public class SettingsServlet extends HttpServlet {
 			response.sendRedirect("usermanagement");
 		} else {
 			session.setAttribute("errorMessages", messages);
-			System.out.println("aaa");
 			response.sendRedirect("settings");
 		}
 	}
@@ -87,17 +85,17 @@ public class SettingsServlet extends HttpServlet {
 		User editUser = userService.getUser(Integer.parseInt(request.getParameter("id")));
 
 		editUser.setName(request.getParameter("name"));
-		editUser.setLogin_id(request.getParameter("login_id"));
+		editUser.setLoginId(request.getParameter("loginId"));
 		editUser.setPassword(request.getParameter("password"));
-		editUser.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
-		editUser.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
+		editUser.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
+		editUser.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
 		return editUser;
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
 		String name = request.getParameter("name");
-		String login_id = request.getParameter("login_id");
+		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String branch_id = request.getParameter("selectBranch");
 		String position_id = request.getParameter("selectPosition");

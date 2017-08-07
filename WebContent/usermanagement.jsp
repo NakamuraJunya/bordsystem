@@ -34,16 +34,16 @@
 
 				<td><c:out value="${user.name}" />
 
-				<td><c:out value="${user.login_id}" /></td>
+				<td><c:out value="${user.loginId}" /></td>
 
         		<c:forEach items="${Branches}" var="branch">
-					<c:if test="${user.branch_id == branch.id}">
+					<c:if test="${user.branchId == branch.id}">
 					<td><c:out value="${branch.name}" /></td>
 					</c:if>
 				</c:forEach>
 
             	<c:forEach items="${Positions}" var="position">
-					<c:if test="${user.position_id == position.id}">
+					<c:if test="${user.positionId == position.id}">
 					<td><c:out value="${position.name}" /></td>
 					</c:if>
 				</c:forEach>
@@ -52,16 +52,25 @@
 						<button type="submit" name="id" value="${user.id}">編集</button>
 					</form>
 				</td>
-					<form action = "settings" method = "get" >
-					<td><input type="submit" value="復活" /> <br /></td>
+				<td>
+				<form action = "isworking" method = "post" onSubmit="return check()" >
+	             <c:if test="${user.is_working == 1}">
+					<button type="submit" name=is_working value="${0}">停止</button>
+					<input type = hidden name="id" value="${user.id}">
+				 </c:if>
+
+				 <c:if test="${user.is_working == 0}">
+					<button type="submit" name="is_working" value="${1}">復活</button>
+					<input type = hidden name="id" value="${user.id}">
+				 </c:if>
+                </form>
+				</td>
 					<tr></tr>
-					</form>
 		 	 </c:forEach>
 
 		</tr>
 
 	</table>
-
 	<p></p>
 	<div class="copyright">Copyright(c)Junya Nakamura</div>
 </body>

@@ -27,8 +27,8 @@
 	<label for="name">名前</label>
 	<input name="name" value="${editUser.name}" /><br />
 <p></p>
-	<label for="login_id">ログインID</label>
-	<input name="login_id" value="${editUser.login_id}" /><br />
+	<label for="loginId">ログインID</label>
+	<input name="loginId" value="${editUser.loginId}" /><br />
 <p></p>
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />

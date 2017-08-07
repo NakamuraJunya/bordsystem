@@ -39,9 +39,9 @@ public class MessageDao {
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setInt(1, messages.getId());
-			ps.setInt(2, messages.getUser_id());
-			ps.setInt(3, messages.getBranch_id());
-			ps.setInt(4, messages.getPosition_id());
+			ps.setInt(2, messages.getUserId());
+			ps.setInt(3, messages.getBranchId());
+			ps.setInt(4, messages.getPositionId());
 			ps.setString(5, messages.getTitle());
 			ps.setString(6, messages.getText());
 			ps.setString(7, messages.getCategory());

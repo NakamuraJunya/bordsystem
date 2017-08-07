@@ -33,10 +33,10 @@ public class CommentServlet extends HttpServlet {
 
 		Comment comment = new Comment();
 		comment.setText(request.getParameter("text"));
-		comment.setMessage_id(Integer.parseInt(request.getParameter("message_id")));
-		comment.setUser_id(Integer.parseInt(request.getParameter("user_id")));
-		comment.setBranch_id(users.getBranch_id());
-		comment.setPosition_id(users.getPosition_id());
+		comment.setMessageId(Integer.parseInt(request.getParameter("messageId")));
+		comment.setUserId(Integer.parseInt(request.getParameter("userId")));
+		comment.setBranchId(users.getBranchId());
+		comment.setPositionId(users.getPositionId());
 
 		if (isValid(request, comments) == true) {
 

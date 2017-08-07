@@ -34,13 +34,46 @@ public class CommentDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, comments.getUser_id());
-			ps.setInt(2, comments.getBranch_id());
-			ps.setInt(3, comments.getPosition_id());
-			ps.setInt(4, comments.getMessage_id());
+			ps.setInt(1, comments.getUserId());
+			ps.setInt(2, comments.getBranchId());
+			ps.setInt(3, comments.getPositionId());
+			ps.setInt(4, comments.getMessageId());
 			ps.setString(5, comments.getText());
 
 			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	public void delete(Connection connection,Comment comments ) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE comments SET");
+			sql.append("  user_id = ?");
+			sql.append(", message_id = ?");
+			sql.append(", branch_id = ?");
+			sql.append(", position_id = ?");
+			sql.append(", text = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, comments.getUserId());
+			ps.setInt(2, comments.getMessageId());
+			ps.setInt(3, comments.getBranchId());
+			ps.setInt(4, comments.getPositionId());
+			ps.setInt(5, comments.getId());
+			ps.setString(6, comments.getText());
+
+			System.out.println(ps.toString());
+
+			ps.executeUpdate();
+
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

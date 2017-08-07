@@ -51,12 +51,12 @@ public class UserCommentDao {
 
 				UserComment comments = new UserComment();
 				comments.setId(id);
-				comments.setUser_id(user_id);
-				comments.setBranch_id(branch_id);
-				comments.setPosition_id(position_id);
-				comments.setMessage_id(message_id);
+				comments.setUserId(user_id);
+				comments.setBranchId(branch_id);
+				comments.setPositionId(position_id);
+				comments.setMessageId(message_id);
 				comments.setText(text);
-				comments.setCreated_at(created_at);
+				comments.setCreatedAt(created_at);
 
 				ret.add(comments);
 			}

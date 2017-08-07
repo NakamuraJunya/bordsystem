@@ -55,9 +55,9 @@ public class UserDao {
 
 				User user = new User();
 				user.setId(id);
-				user.setLogin_id(login_id);
-				user.setBranch_id(branch_id);
-				user.setPosition_id(position_id);
+				user.setLoginId(login_id);
+				user.setBranchId(branch_id);
+				user.setPositionId(position_id);
 				user.setIs_working(is_working);
 				user.setName(name);
 				user.setPassword(password);
@@ -93,11 +93,11 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, users.getLogin_id());
+			ps.setString(1, users.getLoginId());
 			ps.setString(2, users.getPassword());
 			ps.setString(3, users.getName());
-			ps.setInt(4, users.getBranch_id());
-			ps.setInt(5, users.getPosition_id());
+			ps.setInt(4, users.getBranchId());
+			ps.setInt(5, users.getPositionId());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -122,11 +122,11 @@ public class UserDao {
 
 				ps = connection.prepareStatement(sql.toString());
 
-				ps.setString(1, users.getLogin_id());
+				ps.setString(1, users.getLoginId());
 				ps.setString(2, users.getPassword());
 				ps.setString(3, users.getName());
-				ps.setInt(4, users.getBranch_id());
-				ps.setInt(5, users.getPosition_id());
+				ps.setInt(4, users.getBranchId());
+				ps.setInt(5, users.getPositionId());
 				ps.setInt(6, users.getId());
 
 				System.out.println(ps.toString());
@@ -139,20 +139,22 @@ public class UserDao {
 				close(ps);
 			}
 		}
-		public void is_Woking(Connection connection, int id,int isWorking) {
+		public void is_working(Connection connection, int id,int is_working) {
 
 			PreparedStatement ps = null;
 			try {
 				StringBuilder sql = new StringBuilder();
 				sql.append("UPDATE users SET");
-				sql.append("is_working = ?");
+				sql.append(" is_working = ?");
 				sql.append(" WHERE");
 				sql.append(" id = ?");
 
 				ps = connection.prepareStatement(sql.toString());
 
-				ps.setInt(1,isWorking);
+				ps.setInt(1,is_working);
 				ps.setInt(2,id);
+
+				System.out.println(ps.toString());
 
 				ps.executeUpdate();
 

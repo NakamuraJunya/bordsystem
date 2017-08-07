@@ -53,14 +53,14 @@ public class UserMessageDao {
 
 				UserMessage message = new UserMessage();
 				message.setId(id);
-				message.setUser_id(user_id);
-				message.setBranch_id(branch_id);
-				message.setPosition_id(position_id);
+				message.setUserId(user_id);
+				message.setBranchId(branch_id);
+				message.setPositionId(position_id);
 				message.setText(text);
 				message.setCategory(category);
 				message.setName(name);
 				message.setTitle(title);
-				message.setCreated_at(created_at);
+				message.setCreatedAt(created_at);
 
 				ret.add(message);
 			}

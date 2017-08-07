@@ -20,6 +20,9 @@ import service.UserService;
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		int is_working =Integer.parseInt(request.getParameter("is_working"));
-		new UserService().is_Woking(id,is_working);
+		new UserService().is_woking(id,is_working);
+
+		response.sendRedirect("usermanagement");
+
 	}
 }

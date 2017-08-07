@@ -51,10 +51,10 @@ public class SignUpServlet extends HttpServlet {
 
 			User user = new User();
 			user.setName(request.getParameter("name"));
-			user.setLogin_id(request.getParameter("login_id"));
+			user.setLoginId(request.getParameter("loginId"));
 			user.setPassword(request.getParameter("password"));
-			user.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
-			user.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
+			user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
+			user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
 
 			new UserService().register(user);
 
@@ -63,9 +63,9 @@ public class SignUpServlet extends HttpServlet {
 		} else {
 			User user = new User();
 			user.setName(request.getParameter("name"));
-			user.setLogin_id(request.getParameter("login_id"));
-			user.setBranch_id(Integer.parseInt(request.getParameter("selectBranch")));
-			user.setPosition_id(Integer.parseInt(request.getParameter("selectPosition")));
+			user.setLoginId(request.getParameter("loginId"));
+			user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
+			user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
 			request.setAttribute("users", user);
 
 			session.setAttribute("errorMessages", messages);
@@ -77,7 +77,7 @@ public class SignUpServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String name = request.getParameter("name");
-		String login_id = request.getParameter("login_id");
+		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		if (StringUtils.isEmpty(name) == true) {

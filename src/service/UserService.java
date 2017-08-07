@@ -60,14 +60,14 @@ public class UserService {
 		}
 	}
 
-	public void is_Woking(int id,int isWorking) {
+	public void is_woking(int id,int is_working) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			userDao.is_Woking(connection, id,isWorking);
+			userDao.is_working(connection, id,is_working);
 
 			commit(connection);
 		} catch (RuntimeException e) {

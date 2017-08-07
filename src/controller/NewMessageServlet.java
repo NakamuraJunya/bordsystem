@@ -42,9 +42,9 @@ public class NewMessageServlet extends HttpServlet {
 		message.setTitle(request.getParameter("title"));
 		message.setText(request.getParameter("text"));
 		message.setCategory(request.getParameter("category"));
-		message.setUser_id(users.getId());
-		message.setBranch_id(users.getBranch_id());
-		message.setPosition_id(users.getPosition_id());
+		message.setUserId(users.getId());
+		message.setBranchId(users.getBranchId());
+		message.setPositionId(users.getPositionId());
 
 		if (isValid(request, messages) == true) {
 

@@ -33,37 +33,41 @@
 
 		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
 
-		【投稿日時】：<span class="created_at"><fmt:formatDate value="${message.created_at}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
+		【投稿日時】：<span class="createdAt"><fmt:formatDate value="${message.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 
 		【コメント】<div class="text"><c:out value="${makeComment.text}" /></div><br/>
 
         <div class="form-area">
 		<form action="newcomment" method="post">
 			<c:forEach items="${comments}" var="comment">
-				<c:if test="${message.id == comment.message_id}">
+				<c:if test="${message.id == comment.messageId}">
 				<span class ="text"> <c:out value ="${comment.text}"/></span><br/><p><p/>
 				</c:if>
 			</c:forEach>
 
 			<c:forEach items="${Branches}" var="branch">
-				<c:if test="${user.branch_id ==comments.branch.id}">
+				<c:if test="${user.branchId ==comments.branch.id}">
 					<td>><span class="branch.id"><c:out value="${branch.id}"/></span></td>
 				</c:if>
 			</c:forEach>
 
 			<c:forEach items="${Positions}" var="position">
-				<c:if test="${user.position_id == comments.position.id}">
+				<c:if test="${user.positionId == comments.position.id}">
 				<td><span class="position.id"><c:out value="${position.id}" /></span></td>
 				</c:if>
 			</c:forEach>
          <br />
 
 【コメント入力スペース】
-         <input type = hidden name="message_id" value="${message.id}">
+         <input type = hidden name="messageId" value="${message.id}">
          <textarea name="text" cols="100" rows="5" class="tweet-box">${makeComment.text}</textarea>
          <p></p>
-         <button name="user_id" value="${loginUser.id}">コメント</button>
+         <button name="userId" value="${loginUser.id}">コメント</button>
          </form>
+         <form action = "newcomment" method = "delete" onSubmit="return check()" >
+	            <button type="submit" name="id" value="${comment.id}">削除</button>
+					<input type = hidden name="id" value="${user.id}">
+				 </form>
          </div>
 			<p><p/>
    		</c:forEach>
