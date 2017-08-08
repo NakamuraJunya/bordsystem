@@ -15,13 +15,13 @@ import exception.SQLRuntimeException;
 
 public class UserCommentDao {
 
-	public List<UserComment> getUserComments(Connection connection, int num) {
+	public List<UserComment> getUserComments(Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM commentslist ");
-			sql.append("ORDER BY created_at DESC limit " + num);
+			sql.append(" ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 

@@ -14,7 +14,7 @@ import exception.SQLRuntimeException;
 
 public class PositionDao {
 
-	public List<Position> getPosition(Connection connection, int num) {
+	public List<Position> getPosition(Connection connection) {
 
 		PreparedStatement ps = null;
 		try {

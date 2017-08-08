@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.User;
 import beans.UserComment;
 import beans.UserMessage;
 import service.CommentService;
@@ -22,20 +23,17 @@ public class TopServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		User users = (User) request.getSession().getAttribute("loginUser");
-		boolean isShowMessageForm;
-		if (users != null) {
-			isShowMessageForm = true;
-		} else {
-			isShowMessageForm = false;
-		}
-		List<UserMessage> messages = new MessageService().getMessage();
+
+		String startDate = "2017/08/01";
+	    Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String endDate = format.format(cal.getTime());
+
+		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate);
 		List<UserComment> comments = new CommentService().getComment();
 
 		request.setAttribute("messages", messages);
 		request.setAttribute("comments", comments);
-
-		request.setAttribute("isShowMessageForm", isShowMessageForm);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

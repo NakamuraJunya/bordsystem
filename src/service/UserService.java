@@ -81,8 +81,6 @@ public class UserService {
 		}
 	}
 
-	private static final int LIMIT_NUM = 1000;
-
 	public List<User> getUsers() {
 
 		Connection connection = null;
@@ -90,7 +88,7 @@ public class UserService {
 			connection = getConnection();
 
 			UserDao UserDao = new UserDao();
-			List<User> ret = UserDao.getUsers(connection, LIMIT_NUM);
+			List<User> ret = UserDao.getUsers(connection);
 
 			commit(connection);
 

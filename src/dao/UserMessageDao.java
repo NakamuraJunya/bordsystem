@@ -15,15 +15,17 @@ import exception.SQLRuntimeException;
 
 public class UserMessageDao {
 
-	public List<UserMessage> getUserMessages(Connection connection, int num) {
+	public List<UserMessage> getUserMessages(Connection connection,String startDate,String endDate) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM messageslist ");
-			sql.append("ORDER BY created_at DESC limit " + num);
+			sql.append("SELECT * FROM messageslist WHERE ? <= created_at AND ? >= created_at");
+			sql.append(" ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, startDate);
+			ps.setString(2, endDate);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

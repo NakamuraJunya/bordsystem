@@ -31,7 +31,6 @@ public class PositionService {
 			close(connection);
 		}
 	}
-	private static final int LIMIT_NUM = 1000;
 
 	public List<Position> getPosition() {
 
@@ -40,7 +39,7 @@ public class PositionService {
 			connection = getConnection();
 
 			PositionDao positionDao = new PositionDao();
-			List<Position> ret = positionDao.getPosition(connection, LIMIT_NUM);
+			List<Position> ret = positionDao.getPosition(connection);
 
 			commit(connection);
 

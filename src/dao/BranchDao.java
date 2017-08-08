@@ -14,7 +14,7 @@ import exception.SQLRuntimeException;
 
 public class BranchDao {
 
-	public List<Branch> getBranch(Connection connection, int num) {
+	public List<Branch> getBranch(Connection connection) {
 
 		PreparedStatement ps = null;
 		try {

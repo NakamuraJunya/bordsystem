@@ -34,14 +34,14 @@ public class CommentService {
 		}
 	}
 
-	public void delete(Comment comments) {
+	public void delete(int id) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			CommentDao commentDao = new CommentDao();
-			commentDao.delete(connection, comments);
+			commentDao.delete(connection, id);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -55,8 +55,6 @@ public class CommentService {
 		}
 	}
 
-	private static final int LIMIT_NUM = 1000;
-
 	public List<UserComment> getComment() {
 
 		Connection connection = null;
@@ -64,7 +62,7 @@ public class CommentService {
 			connection = getConnection();
 
 			UserCommentDao commentDao = new UserCommentDao();
-			List<UserComment> ret = commentDao.getUserComments(connection, LIMIT_NUM);
+			List<UserComment> ret = commentDao.getUserComments(connection);
 
 			commit(connection);
 

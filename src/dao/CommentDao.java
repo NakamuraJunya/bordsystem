@@ -47,28 +47,18 @@ public class CommentDao {
 			close(ps);
 		}
 	}
-	public void delete(Connection connection,Comment comments ) {
+	public void delete(Connection connection, int id) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("DELETE comments SET");
-			sql.append("  user_id = ?");
-			sql.append(", message_id = ?");
-			sql.append(", branch_id = ?");
-			sql.append(", position_id = ?");
-			sql.append(", text = ?");
 			sql.append(" WHERE");
 			sql.append(" id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, comments.getUserId());
-			ps.setInt(2, comments.getMessageId());
-			ps.setInt(3, comments.getBranchId());
-			ps.setInt(4, comments.getPositionId());
-			ps.setInt(5, comments.getId());
-			ps.setString(6, comments.getText());
+			ps.setInt(1,id);
 
 			System.out.println(ps.toString());
 

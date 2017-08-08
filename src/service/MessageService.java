@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.util.List;
 
 import beans.Message;
+import beans.User;
 import beans.UserMessage;
 import dao.MessageDao;
+import dao.UserDao;
 import dao.UserMessageDao;
 
 public class MessageService {
@@ -33,16 +35,40 @@ public class MessageService {
 			close(connection);
 		}
 	}
-	private static final int LIMIT_NUM = 1000;
 
-	public List<UserMessage> getMessage() {
+	public User getUser(int id) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
+			UserDao UserDao = new UserDao();
+			User user = UserDao
+					.getUser(connection, id);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<UserMessage> getMessage(String startDate ,String endDate) {
+
+		Connection connection = null;
+		try {
+
+			connection = getConnection();
+
 			UserMessageDao messageDao = new UserMessageDao();
-			List<UserMessage> ret = messageDao.getUserMessages(connection, LIMIT_NUM);
+			List<UserMessage> ret = messageDao.getUserMessages(connection,startDate,endDate);
 
 			commit(connection);
 
