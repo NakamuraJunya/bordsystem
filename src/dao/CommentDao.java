@@ -52,7 +52,7 @@ public class CommentDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("DELETE comments SET");
+			sql.append("DELETE FROM comments");
 			sql.append(" WHERE");
 			sql.append(" id = ?");
 

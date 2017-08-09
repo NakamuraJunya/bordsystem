@@ -35,6 +35,26 @@ public class MessageService {
 			close(connection);
 		}
 	}
+	public void delete(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			MessageDao messageDao = new MessageDao();
+			messageDao.delete(connection, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	public User getUser(int id) {
 
@@ -60,7 +80,7 @@ public class MessageService {
 		}
 	}
 
-	public List<UserMessage> getMessage(String startDate ,String endDate) {
+	public List<UserMessage> getMessage(String startDate ,String endDate,String category) {
 
 		Connection connection = null;
 		try {
@@ -68,7 +88,7 @@ public class MessageService {
 			connection = getConnection();
 
 			UserMessageDao messageDao = new UserMessageDao();
-			List<UserMessage> ret = messageDao.getUserMessages(connection,startDate,endDate);
+			List<UserMessage> ret = messageDao.getUserMessages(connection,startDate,endDate,category);
 
 			commit(connection);
 

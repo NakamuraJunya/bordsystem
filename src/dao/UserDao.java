@@ -19,7 +19,7 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ?";
+			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ? AND is_working = 1";
 
 			ps = connection.prepareStatement(sql);
 			ps.setString(1, login_id);

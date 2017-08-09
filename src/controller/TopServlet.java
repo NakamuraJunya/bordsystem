@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.UserComment;
 import beans.UserMessage;
 import service.CommentService;
@@ -24,16 +26,27 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		String startDate = "2017/08/01";
-	    Calendar cal = Calendar.getInstance();
-	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	    String endDate = format.format(cal.getTime());
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate =  request.getParameter("startDate");
+	    String endDate = request.getParameter("endDate");
+	    String category = request.getParameter("category");
 
-		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate);
+		if (StringUtils.isNotBlank(startDate) == false) {
+		    startDate = "2017-07-31";
+		}
+		if (StringUtils.isNotBlank(endDate) == false) {
+			endDate = format.format(calendar.getTime());
+		}
+		if (StringUtils.isNotBlank(category) == false) {
+			category = request.getParameter("category");
+		}
+		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate,category);
 		List<UserComment> comments = new CommentService().getComment();
 
 		request.setAttribute("messages", messages);
 		request.setAttribute("comments", comments);
+
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}
