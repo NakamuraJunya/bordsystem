@@ -6,13 +6,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ユーザー編集</title>
+	<title>ユーザー編集画面</title>
 </head>
 <body>
 <p></p>
-	<a href="usermanagement">ユーザー管理画面に戻る</a>
+	<a href="usermanagement">ユーザー管理に戻る</a>
 	<p></p>
-<font size="5">ユーザー編集画面</font>
+<font size="5">ユーザー編集</font>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -38,6 +38,7 @@
 <p></p>
 支店名
 <select name = "selectBranch">
+		<option value="">支店名を選択してください</option>
     	<c:forEach items="${Branches}" var="branch">
 				<option value="${branch.id}">${branch.name}</option>
 			</c:forEach>
@@ -45,6 +46,7 @@
 <p></p>
 部署・役職
 <select name = "selectPosition">
+		<option value="">部署・役職を選択してください</option>
     	<c:forEach items="${Positions}" var="position">
 					<option value="${position.id}">${position.name}</option>
 

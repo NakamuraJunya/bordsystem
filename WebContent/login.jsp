@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ログイン</title>
+	<title>ログイン画面</title>
 
 </head>
 <body>

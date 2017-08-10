@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.UserMessage;
 import exception.SQLRuntimeException;
 
@@ -21,17 +23,18 @@ public class UserMessageDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM messageslist WHERE ? <= created_at AND ? >= created_at");
-			if(category==null){
+			if (StringUtils.isBlank(category) == false) {
 			sql.append(" AND category = ? ");
 			}
 			sql.append(" ORDER BY created_at DESC");
 
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, startDate + " 23:59:59");
+			ps.setString(1, startDate + " 00:00:00");
 			ps.setString(2, endDate + " 23:59:59");
-			if(category==null){
+			if (StringUtils.isBlank(category) == false) {
 			ps.setString(3, category);
 			}
+
 			System.out.println(ps.toString());
 
 			ResultSet rs = ps.executeQuery();
@@ -43,7 +46,6 @@ public class UserMessageDao {
 			close(ps);
 		}
 	}
-
 	private List<UserMessage> toUserMessageList(ResultSet rs)
 			throws SQLException {
 
@@ -78,5 +80,45 @@ public class UserMessageDao {
 			close(rs);
 		}
 	}
+	public List<UserMessage> getUserMessageCategory(Connection connection) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT DISTINCT category FROM messages");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			System.out.println(ps.toString());
+
+			ResultSet rs = ps.executeQuery();
+			List<UserMessage> ret = toUserMessageCategoryList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<UserMessage> toUserMessageCategoryList(ResultSet rs)
+			throws SQLException {
+
+		List<UserMessage> ret = new ArrayList<UserMessage>();
+		try {
+			while (rs.next()) {
+
+				String category = rs.getString("category");
+
+				UserMessage message = new UserMessage();
+				message.setCategory(category);
+
+				ret.add(message);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
 
 }

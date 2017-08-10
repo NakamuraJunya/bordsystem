@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>ユーザー管理</title>
+    <title>ユーザー管理画面</title>
 </head>
 <body>
 	<div class="header">
@@ -20,7 +20,7 @@
 		現在、<span class="name"><c:out value="${loginUser.name}" /> でログイン中です</span>
 	</div>
 	<p></p>
-	<font size="5">ユーザー管理画面</font>
+	<font size="5">ユーザー管理</font>
 
 	<table border=1>
 		<tr>

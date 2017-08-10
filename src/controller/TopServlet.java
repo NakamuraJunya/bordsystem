@@ -38,15 +38,14 @@ public class TopServlet extends HttpServlet {
 		if (StringUtils.isNotBlank(endDate) == false) {
 			endDate = format.format(calendar.getTime());
 		}
-		if (StringUtils.isNotBlank(category) == false) {
-			category = request.getParameter("category");
-		}
+
 		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate,category);
 		List<UserComment> comments = new CommentService().getComment();
+		List<UserMessage> categoryList = new MessageService().getMessageCategory();
 
 		request.setAttribute("messages", messages);
 		request.setAttribute("comments", comments);
-
+		request.setAttribute("categoryList", categoryList);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

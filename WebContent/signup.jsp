@@ -9,9 +9,9 @@
 	<title>ユーザー登録画面</title>
 </head>
 <body>
-<a href="usermanagement">ユーザー管理画面に戻る</a>
+<a href="usermanagement">ユーザー管理に戻る</a>
 <p></p>
-<font size="5">ユーザー登録画面</font>
+<font size="5">ユーザー登録</font>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -36,6 +36,7 @@
 <p></p>
 支店名
 <select name = "selectBranch">
+		<option value="">支店名を選択してください</option>
     	<c:forEach items="${Branches}" var="branch">
 					<option value="${branch.id}">${branch.name}</option>
 			</c:forEach>
@@ -43,6 +44,7 @@
 <p></p>
 部署・役職
 <select name = "selectPosition">
+		<option value="">部署・役職を選択してください</option>
     	<c:forEach items="${Positions}" var="position">
 					<option value="${position.id}">${position.name}</option>
 

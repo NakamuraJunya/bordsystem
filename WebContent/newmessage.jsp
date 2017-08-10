@@ -12,7 +12,7 @@
 <body>
 <a href="./">ホーム</a>
 
-<p><font size="5">新規投稿画面</font></p>
+<p><font size="5">新規投稿</font></p>
 
 <div>
 <c:if test="${ not empty errorMessages }">

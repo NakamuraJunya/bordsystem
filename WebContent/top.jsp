@@ -7,12 +7,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>掲示板</title>
+	<title>掲示板画面</title>
 </head>
 <body>
 	<div class="header">
-		<a href="usermanagement">ユーザー管理画面</a>
-		<a href="newmessage">新規投稿画面</a>
+		<a href="usermanagement">ユーザー管理</a>
+		<a href="newmessage">新規投稿</a>
 		<a href="logout">ログアウト</a>
 	</div>
 	<p><p/>
@@ -24,9 +24,14 @@
 	<form action = "./" method = "get"><font size="4">絞込み検索</font>
 	<p><p/>
 【カテゴリー検索】:
-		<label for="category"></label>
-		<input name="category" value="${category}" /><br />
-		<p><p/>
+	<select name = "category">
+			<option value="">カテゴリーを選択してください</option>
+    	<c:forEach items="${categoryList}" var="category">
+			<option value="${category.category}">${category.category}</option>
+		</c:forEach>
+	</select>
+<br />
+
 【日付検索】:
 		<label for="startDate"></label>
 		<input type="date" name="startDate" value="${startDate}" />～
@@ -36,7 +41,7 @@
 
 		<p><p/>
 
-		<button type="submit" name="id" value="${comment.id}">検索</button>
+		<button type="submit" >検索</button>
 	</form>
 
 	<div class="messages">
@@ -64,7 +69,7 @@
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${message.id == comment.messageId}">
 					<span class ="text"> <c:out value ="${comment.text}"/></span><br/><p><p/>
-					【投稿者】:<span class="id"><c:out value="${comment.userId}" /></span><br/><p><p/>
+					【投稿者】:<span class="id"><c:out value="${comment.name}" /></span><br/><p><p/>
 					【投稿日時】：<span class="createdAt"><fmt:formatDate value="${comment.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 					<form action = "commentdelete" method = "post" >
 	           			<button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
