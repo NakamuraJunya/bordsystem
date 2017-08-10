@@ -25,7 +25,7 @@
 	<p><p/>
 【カテゴリー検索】:
 	<select name = "category">
-			<option value="">カテゴリーを選択してください</option>
+			<option value=""></option>
     	<c:forEach items="${categoryList}" var="category">
 			<option value="${category.category}">${category.category}</option>
 		</c:forEach>

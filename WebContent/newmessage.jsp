@@ -34,7 +34,8 @@
 <label for="title">件名</label>
 <input name="title"value="${makeMessage.title}" id="title"/><br />
 <p></p>
-<label for="category">カテゴリー</label>
+
+<label for="category">新規カテゴリー</label>
 <input name="category"value="${makeMessage.category}" id="category"/><br />
 <p></p>
 <label for="text">本文</label>
