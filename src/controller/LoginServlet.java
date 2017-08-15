@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.User;
 import service.LoginService;
 
@@ -32,17 +34,25 @@ public class LoginServlet extends HttpServlet {
 
 		String login_id = request.getParameter("login_id");
 		String password = request.getParameter("password");
+		List<String> messages = new ArrayList<String>();
 
 		LoginService loginService = new LoginService();
 		User user = loginService.login(login_id, password);
 
 		HttpSession session = request.getSession();
+
+		if (StringUtils.isEmpty(login_id) == true) {
+			messages.add("ログインIDを入力してください");
+		}
+
+		if (StringUtils.isEmpty(password) == true) {
+			messages.add("パスワードを入力してください");
+		}
 		if (user != null) {
 			session.setAttribute("loginUser", user);
 			response.sendRedirect("./");
 		} else {
 			request.setAttribute("login_id", login_id);
-			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
 			session.setAttribute("errorMessages", messages);
 

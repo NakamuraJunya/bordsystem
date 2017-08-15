@@ -23,15 +23,28 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<form action = settings  method = "post" enctype ="multipart/form-date"><br/>
+<script>
+
+function check(){
+	if(window.confirm('入力した内容で変更してもよろしいですか？')){ // 確認ダイアログを表示
+		return true; // 「OK」時は送信を実行
+	}
+	else{ // 「キャンセル」時の処理
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false; // 送信を中止
+	}
+}
+
+</script>
+<form action = settings  method = "post" onSubmit="return check()"><br/>
 	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}" /><br />
+	<input name="name" value="${editUser.name}" />（10文字以内で入力してください）<br />
 <p></p>
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${editUser.loginId}" /><br />
+	<input name="loginId" value="${editUser.loginId}" />（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
+	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード確認</label>
 	<input name="password" type="password" id="password"/> <br />

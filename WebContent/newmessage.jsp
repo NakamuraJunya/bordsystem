@@ -32,18 +32,18 @@
 
 <p class="form-item">
 <label for="title">件名</label>
-<input name="title"value="${makeMessage.title}" id="title"/><br />
+<input maxlength='30' name="title"value="${makeMessage.title}" id="title"/>（30文字以内で入力してください)<br />
 <p></p>
 
 <label for="category">新規カテゴリー</label>
-<input name="category"value="${makeMessage.category}" id="category"/><br />
+<input maxlength='10' name="category"value="${makeMessage.category}" id="category"/>（10文字以内で入力してください）<br />
 <p></p>
 <label for="text">本文</label>
 <br />
-<textarea name="text" cols="100" rows="5" class="tweet-box">${makeMessage.text}</textarea>
+<textarea maxlength='1000'  name="text" cols="100" rows="5" class="tweet-box">${makeMessage.text}</textarea>
 <br />
 <p></p>
-<input type="submit" value="投稿">（1000文字まで）
+<input type="submit" value="投稿">（1000文字以内で入力してください）
 </form>
 </div>
 <p></p>

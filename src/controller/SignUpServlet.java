@@ -79,6 +79,8 @@ public class SignUpServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		String branch_id = request.getParameter("selectBranch");
+		String position_id = request.getParameter("selectPosition");
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
@@ -94,6 +96,12 @@ public class SignUpServlet extends HttpServlet {
 		}
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
+		}
+		if (branch_id == null  ) {
+			messages.add("支店名を選択してください");
+		}
+		if (position_id == "部署・役職を選択してください") {
+			messages.add("部署・役職を選択してください");
 		}
 		if (messages.size() == 0) {
 			return true;

@@ -10,6 +10,19 @@
 	<title>掲示板画面</title>
 </head>
 <body>
+<script>
+
+function check(){
+	if(window.confirm('選択した内容を削除してもよろしいですか？')){ // 確認ダイアログを表示
+		return true; // 「OK」時は送信を実行
+	}
+	else{ // 「キャンセル」時の処理
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+		return false; // 送信を中止
+	}
+}
+
+</script>
 	<div class="header">
 		<a href="usermanagement">ユーザー管理</a>
 		<a href="newmessage">新規投稿</a>
@@ -25,7 +38,7 @@
 	<p><p/>
 【カテゴリー検索】:
 	<select name = "category">
-			<option value=""></option>
+			<option value="">カテゴリーを選択してください</option>
     	<c:forEach items="${categoryList}" var="category">
 			<option value="${category.category}">${category.category}</option>
 		</c:forEach>
@@ -42,6 +55,8 @@
 		<p><p/>
 
 		<button type="submit" >検索</button>
+		<p><p/>
+		<button type="submit" >全件表示</button>
 	</form>
 
 	<div class="messages">
@@ -55,7 +70,7 @@
 		【本文】:
 				<span class="text"><c:out value="${message.text}" /></span><br/>
 
-			<form action = "messagedelete" method = "post" >
+			<form action = "messagedelete" method = "post" onSubmit="return check()" >
 	           	<button type="submit" name="id" value="${message.id}">削除</button>
 				<input type = hidden name="id" value="${user.id}">
 		 	</form>
@@ -69,9 +84,10 @@
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${message.id == comment.messageId}">
 					<span class ="text"> <c:out value ="${comment.text}"/></span><br/><p><p/>
-					【投稿者】:<span class="id"><c:out value="${comment.name}" /></span><br/><p><p/>
+					【投稿者】:<span class="name"><c:out value="${comment.name}" /></span><br/><p><p/>
 					【投稿日時】：<span class="createdAt"><fmt:formatDate value="${comment.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
-					<form action = "commentdelete" method = "post" >
+
+					<form action = "commentdelete" method = "post" onSubmit="return check()" >
 	           			<button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
 						<input type = hidden name="id" value="${user.id}">
 		 			</form>

@@ -53,6 +53,19 @@
 					</form>
 				</td>
 				<td>
+				<script>
+
+					function check(){
+						if(window.confirm('選択したアカウントの情報を変更してもよろしいですか？')){ // 確認ダイアログを表示
+							return true; // 「OK」時は送信を実行
+						}
+						else{ // 「キャンセル」時の処理
+						window.alert('キャンセルされました'); // 警告ダイアログを表示
+						return false; // 送信を中止
+						}
+						}
+
+				</script>
 				<form action = "isworking" method = "post" onSubmit="return check()" >
 	             <c:if test="${user.is_working == 1}">
 					<button type="submit" name=is_working value="${0}">停止</button>
