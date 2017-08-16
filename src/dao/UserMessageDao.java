@@ -26,7 +26,7 @@ public class UserMessageDao {
 			if (StringUtils.isBlank(category) == false) {
 			sql.append(" AND category = ? ");
 			}
-			sql.append(" ORDER BY created_at DESC");
+			sql.append(" ORDER BY created_at DESC ");
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, startDate + " 00:00:00");

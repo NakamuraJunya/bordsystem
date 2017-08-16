@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,13 +37,13 @@ public class SettingsServlet extends HttpServlet {
 		session.setAttribute("editUser", editUser);
 		session.setAttribute("id", editUser);
 
-		List<Branch> Branch = new BranchService().getBranch();
+		List<Branch> branchList = new BranchService().getBranch();
 
-		request.setAttribute("Branches", Branch);
+		request.setAttribute("branchList", branchList);
 
-		List<Position> Position = new PositionService().getPosition();
+		List<Position> positionList = new PositionService().getPosition();
 
-		request.setAttribute("Positions", Position);
+		request.setAttribute("positionList", positionList);
 
 		request.getRequestDispatcher("settings.jsp").forward(request, response);
 	}
@@ -57,7 +58,18 @@ public class SettingsServlet extends HttpServlet {
 
 		User editUser = getEditUser(request);
 
+		User user = new User();
+		user.setName(request.getParameter("name"));
+		user.setLoginId(request.getParameter("loginId"));
+		user.setPassword(request.getParameter("password"));
+		user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
+		user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
+
 		if (isValid(request, messages) == true) {
+
+			new UserService().register(user);
+
+			response.sendRedirect("settings");
 
 			try {
 				new UserService().update(editUser);
@@ -73,8 +85,20 @@ public class SettingsServlet extends HttpServlet {
 
 			response.sendRedirect("usermanagement");
 		} else {
+
 			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("settings");
+			session.setAttribute("user", user);
+
+			List<Branch> branchList = new BranchService().getBranch();
+
+			request.setAttribute("branchList", branchList);
+
+			List<Position> positionList = new PositionService().getPosition();
+
+			request.setAttribute("positionList", positionList);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/settings.jsp");
+			dispatcher.forward(request,response);
 		}
 	}
 
@@ -97,22 +121,31 @@ public class SettingsServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		String branch_id = request.getParameter("selectBranch");
-		String position_id = request.getParameter("selectPosition");
+		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
+		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
 		}
+		if (10< name.length()) {
+				messages.add("名前は10文字以内で入力してください");
+		}
 		if (StringUtils.isEmpty(login_id) == true) {
 			messages.add("ログインIDを入力してください");
+		}
+		if (!login_id.matches("\\w{6,20}")) {
+			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
 		}
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
-		if (StringUtils.isEmpty(branch_id) == true) {
+		if  (!login_id.matches("\\w{6,20}")) {
+			messages.add("記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+		}
+		if (branchId == 0) {
 			messages.add("支店名を選択してください");
 		}
-		if (StringUtils.isEmpty(position_id) == true) {
+		if (positionId == 0) {
 			messages.add("部署・役職を選択してください");
 		}
 		if (messages.size() == 0) {

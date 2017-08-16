@@ -29,13 +29,13 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Branch> Branch = new BranchService().getBranch();
+		List<Branch> branchList = new BranchService().getBranch();
 
-		request.setAttribute("Branches", Branch);
+		request.setAttribute("branchList", branchList);
 
-		List<Position> Position = new PositionService().getPosition();
+		List<Position> positionList = new PositionService().getPosition();
 
-		request.setAttribute("Positions", Position);
+		request.setAttribute("positionList", positionList);
 
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
@@ -47,28 +47,31 @@ public class SignUpServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 
 		HttpSession session = request.getSession();
+
+		User user = new User();
+		user.setName(request.getParameter("name"));
+		user.setLoginId(request.getParameter("loginId"));
+		user.setPassword(request.getParameter("password"));
+		user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
+		user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
+
+
 		if (isValid(request, messages) == true) {
-
-			User user = new User();
-			user.setName(request.getParameter("name"));
-			user.setLoginId(request.getParameter("loginId"));
-			user.setPassword(request.getParameter("password"));
-			user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
-			user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
-
 			new UserService().register(user);
-
 			response.sendRedirect("./");
 
 		} else {
-			User user = new User();
-			user.setName(request.getParameter("name"));
-			user.setLoginId(request.getParameter("loginId"));
-			user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
-			user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
-			request.setAttribute("users", user);
 
 			session.setAttribute("errorMessages", messages);
+			session.setAttribute("user", user);
+
+			List<Branch> branchList = new BranchService().getBranch();
+
+			request.setAttribute("branchList", branchList);
+
+			List<Position> positionList = new PositionService().getPosition();
+
+			request.setAttribute("positionList", positionList);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/signup.jsp");
 			dispatcher.forward(request,response);
@@ -79,8 +82,8 @@ public class SignUpServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		String branch_id = request.getParameter("selectBranch");
-		String position_id = request.getParameter("selectPosition");
+		int branch_id = Integer.parseInt(request.getParameter("selectBranch"));
+		int position_id = Integer.parseInt(request.getParameter("selectPosition"));
 
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
@@ -97,10 +100,13 @@ public class SignUpServlet extends HttpServlet {
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
 		}
-		if (branch_id == null  ) {
+		if  (!login_id.matches("\\w{6,20}")) {
+			messages.add("記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+		}
+		if (branch_id == 0  ) {
 			messages.add("支店名を選択してください");
 		}
-		if (position_id == "部署・役職を選択してください") {
+		if (position_id == 0) {
 			messages.add("部署・役職を選択してください");
 		}
 		if (messages.size() == 0) {

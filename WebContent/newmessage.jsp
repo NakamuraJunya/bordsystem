@@ -26,9 +26,22 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 </div>
+	<script>
+
+		function check(){
+			if(window.confirm('投稿してもよろしいですか？')){ // 確認ダイアログを表示
+			return true; // 「OK」時は送信を実行
+			}
+			else{ // 「キャンセル」時の処理
+			window.alert('キャンセルされました'); // 警告ダイアログを表示
+			return false; // 送信を中止
+		}
+	}
+
+	</script>
 
 <div class="form-area">
-<form action="newmessage" method="post">
+<form action="newmessage" method="post" onSubmit="return check()">
 
 <p class="form-item">
 <label for="title">件名</label>

@@ -37,13 +37,13 @@ function check(){
 	<form action = "./" method = "get"><font size="4">絞込み検索</font>
 	<p><p/>
 【カテゴリー検索】:
-	<select name = "category">
+	<select name = "category" size="1">
 			<option value="">カテゴリーを選択してください</option>
     	<c:forEach items="${categoryList}" var="category">
 			<option value="${category.category}">${category.category}</option>
 		</c:forEach>
 	</select>
-<br />
+
 
 【日付検索】:
 		<label for="startDate"></label>
@@ -71,8 +71,22 @@ function check(){
 				<span class="text"><c:out value="${message.text}" /></span><br/>
 
 			<form action = "messagedelete" method = "post" onSubmit="return check()" >
-	           	<button type="submit" name="id" value="${message.id}">削除</button>
-				<input type = hidden name="id" value="${user.id}">
+
+				<c:choose>
+					<c:when test="${loginUser.id == message.userId}">
+						 <button type="submit" name="id" value="${message.id}">削除</button><p><p/>
+					</c:when>
+
+					<c:when test="${loginUser.positionId == 2}">
+ 						<button type="submit" name="id" value="${message.id}">削除</button><p><p/>
+					</c:when>
+
+					<c:when test="${loginUser.branchId == message.branchId && loginUser.positionId == 3}">
+						<button type="submit" name="id" value="${message.id}">削除</button><p><p/>
+					</c:when>
+
+				</c:choose>
+
 		 	</form>
 		 	<p><p/>
 		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
@@ -88,8 +102,23 @@ function check(){
 					【投稿日時】：<span class="createdAt"><fmt:formatDate value="${comment.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 
 					<form action = "commentdelete" method = "post" onSubmit="return check()" >
-	           			<button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
-						<input type = hidden name="id" value="${user.id}">
+
+						<c:choose>
+							<c:when test="${loginUser.id == comment.userId}">
+							 <button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
+							</c:when>
+
+							<c:when test="${loginUser.positionId == 2}">
+ 								<button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
+							 </c:when>
+
+							<c:when test="${loginUser.branchId == comment.branchId && loginUser.positionId == 3}">
+								<button type="submit" name="id" value="${comment.id}">削除</button><p><p/>
+								<input type = hidden name="id" value="${user.id}">
+							</c:when>
+
+						</c:choose>
+
 		 			</form>
 				</c:if>
 			</c:forEach>

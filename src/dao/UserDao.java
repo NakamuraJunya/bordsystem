@@ -168,9 +168,11 @@ public class UserDao {
 	public List<User> getUsers(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users";
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users");
+			sql.append(" ORDER BY branch_id,position_id");
 
-			ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql.toString());
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);

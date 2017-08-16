@@ -9,20 +9,9 @@
 	<title>ユーザー編集画面</title>
 </head>
 <body>
-<p></p>
-	<a href="usermanagement">ユーザー管理に戻る</a>
-	<p></p>
+
 <font size="5">ユーザー編集</font>
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-			</c:forEach>
-		</ul>
-	</div>
-	<c:remove var="errorMessages" scope="session"/>
-</c:if>
+
 <script>
 
 function check(){
@@ -36,42 +25,59 @@ function check(){
 }
 
 </script>
+<div>
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
+</div>
+
 <form action = settings  method = "post" onSubmit="return check()"><br/>
 	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}" />（10文字以内で入力してください）<br />
+	<input maxlength='10' name="name" value="${editUser.name}" />（10文字以内で入力してください）<br />
 <p></p>
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${editUser.loginId}" />（半角英数字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="loginId" value="${editUser.loginId}" />（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="password" value="${user.password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード確認</label>
-	<input name="password" type="password" id="password"/> <br />
+	<input maxlength='20' name="password" value="${user.password}" type="password" id="password"/> <br />
 <p></p>
 支店名
 <select name = "selectBranch">
-		<option value="">支店名を選択してください</option>
-    	<c:forEach items="${Branches}" var="branch">
+		<option value="0">支店名を選択してください</option>
+    	<c:forEach items="${branchList}" var="branch">
 				<option value="${branch.id}">${branch.name}</option>
 			</c:forEach>
 </select>
 <p></p>
 部署・役職
 <select name = "selectPosition">
-		<option value="">部署・役職を選択してください</option>
-    	<c:forEach items="${Positions}" var="position">
+		<option value="0">部署・役職を選択してください</option>
+    	<c:forEach items="${positionList}" var="position">
 					<option value="${position.id}">${position.name}</option>
 
 			</c:forEach>
 </select>
-
+<p></p>
 	<button type="submit" name="id" value="${editUser.id}">変更</button>
 
 </form>
 <p></p>
+	<a href="usermanagement">ユーザー管理に戻る</a>
+<p></p>
 
 <div class="copyright">Copyright(c)Junya Nakamura</div>
+
+
 
 </body>
 </html>

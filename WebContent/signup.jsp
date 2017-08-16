@@ -9,8 +9,7 @@
 	<title>ユーザー登録画面</title>
 </head>
 <body>
-<a href="usermanagement">ユーザー管理に戻る</a>
-<p></p>
+
 <font size="5">ユーザー登録</font>
 <div class="main-contents">
 <c:if test="${ not empty errorMessages }">
@@ -38,31 +37,31 @@ function check(){
 </script>
 <form action="signup" method="post" onSubmit="return check()"><br />
 	<label for="name">名前</label>
-	<input name="name" value="${user.name}" id="name"/>（10文字以内で入力してください）<br />
+	<input maxlength='10' name="name" value="${user.name}" id="name"/>（10文字以内で入力してください）<br />
 <p></p>
 	<label for="loginId">ログインID</label>
-	<input name="loginId"value="${user.loginId}" id="loginId"/>（半角英数字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="loginId"value="${user.loginId}" id="loginId"/>（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード</label>
 
-	<input name="password"value="${user.password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="password"value="${user.password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">確認用パスワード</label>
 
-	<input name="password"value="${user.password}" type="password" id="password"/> <br />
+	<input maxlength='20' name="password"value="${user.password}" type="password" id="password"/> <br />
 <p></p>
 支店名
 <select name = "selectBranch">
-		<option value="">支店名を選択してください</option>
-    	<c:forEach items="${Branches}" var="branch">
+		<option value="0">支店名を選択してください</option>
+    	<c:forEach items="${branchList}" var="branch">
 					<option value="${branch.id}">${branch.name}</option>
 			</c:forEach>
 </select>
 <p></p>
 部署・役職
 <select name = "selectPosition">
-		<option value="">部署・役職を選択してください</option>
-    	<c:forEach items="${Positions}" var="position">
+		<option value="0">部署・役職を選択してください</option>
+    	<c:forEach items="${positionList}" var="position">
 					<option value="${position.id}">${position.name}</option>
 
 			</c:forEach>
@@ -72,6 +71,8 @@ function check(){
 	<input type="submit" value="登録" /> <br />
 <p></p>
 </form>
+<a href="usermanagement">ユーザー管理に戻る</a>
+<p></p>
 <div class="copyright">Copyright(c)Junya Nakamura</div>
 </div>
 </body>
