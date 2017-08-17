@@ -23,8 +23,11 @@ function check(){
 }
 
 </script>
+
 	<div class="header">
+	<c:if test="${loginUser.positionId==1}">
 		<a href="usermanagement">ユーザー管理</a>
+	</c:if>
 		<a href="newmessage">新規投稿</a>
 		<a href="logout">ログアウト</a>
 	</div>
@@ -34,13 +37,26 @@ function check(){
 	</div>
 	<p><font size="5">商売繁盛掲示板</font></p>
 	<p><p/>
+	<div>
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="message">
+						<li><c:out value="${message}" />
+					</c:forEach>
+				</ul>
+			</div>
+			<c:remove var="errorMessages" scope="session"/>
+		</c:if>
+	</div>
+
 	<form action = "./" method = "get"><font size="4">絞込み検索</font>
 	<p><p/>
 【カテゴリー検索】:
 	<select name = "category" size="1">
 			<option value="">カテゴリーを選択してください</option>
     	<c:forEach items="${categoryList}" var="category">
-			<option value="${category.category}">${category.category}</option>
+			<option value="${category.category}"<c:if test="${category.category==true}"> selected </c:if> >${category.category}</option>
 		</c:forEach>
 	</select>
 
@@ -56,7 +72,6 @@ function check(){
 
 		<button type="submit" >検索</button>
 		<p><p/>
-		<button type="submit" >全件表示</button>
 	</form>
 
 	<div class="messages">
@@ -126,7 +141,7 @@ function check(){
    	      	<br />
 			<form action="newcomment" method="post">
 				【コメント入力スペース】
-         		<input type = hidden name="messageId" value="${message.id}">
+         		<input type = hidden name="messageId" value="${message.id}" >
          		<textarea name="text" cols="100" rows="5" class="tweet-box">${makeComment.text}</textarea>
         		<p></p>
         	 	<button name="userId" value="${loginUser.id}">コメント</button>

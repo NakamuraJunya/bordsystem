@@ -54,7 +54,7 @@ function check(){
 <select name = "selectBranch">
 		<option value="0">支店名を選択してください</option>
     	<c:forEach items="${branchList}" var="branch">
-					<option value="${branch.id}">${branch.name}</option>
+					<option value="${branch.id}" <c:if test="${ branch.id == user.branchId }"> selected </c:if> >${branch.name}</option>
 			</c:forEach>
 </select>
 <p></p>
@@ -62,7 +62,7 @@ function check(){
 <select name = "selectPosition">
 		<option value="0">部署・役職を選択してください</option>
     	<c:forEach items="${positionList}" var="position">
-					<option value="${position.id}">${position.name}</option>
+					<option value="${position.id}"<c:if test="${ position.id == user.positionId }"> selected </c:if>>${position.name}</option>
 
 			</c:forEach>
 </select>

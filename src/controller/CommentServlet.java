@@ -1,10 +1,11 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,10 @@ import org.apache.commons.lang.StringUtils;
 
 import beans.Comment;
 import beans.User;
+import beans.UserComment;
+import beans.UserMessage;
 import service.CommentService;
+import service.MessageService;
 
 @WebServlet(urlPatterns = { "/newcomment" })
 public class CommentServlet extends HttpServlet {
@@ -28,7 +32,7 @@ public class CommentServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		List<String> comments = new ArrayList<String>();
+		List<String> errors = new ArrayList<String>();
 		User users = (User) session.getAttribute("loginUser");
 
 		Comment comment = new Comment();
@@ -38,18 +42,30 @@ public class CommentServlet extends HttpServlet {
 		comment.setBranchId(users.getBranchId());
 		comment.setPositionId(users.getPositionId());
 
-		if (isValid(request, comments) == true) {
+		if (isValid(request, errors) == true) {
 
 			new CommentService().register(comment);
 
 			response.sendRedirect("./");
 		} else {
-			session.setAttribute("errorMessages", comments);
-
+			session.setAttribute("errorMessages", errors);
 			request.setAttribute("makeComment", comment);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/top.jsp");
-			dispatcher.forward(request,response);
+
+			List<UserMessage> messages =
+					new MessageService().getMessage(
+							"2017-07-31",
+							new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()),
+							"");
+			List<UserComment> comments = new CommentService().getComment();
+			List<UserMessage> categoryList = new MessageService().getMessageCategory();
+
+			request.setAttribute("messages", messages);
+			request.setAttribute("comments", comments);
+			request.setAttribute("categoryList", categoryList);
+
+
+			request.getRequestDispatcher("/top.jsp").forward(request,response);
 		}
 	}
 
@@ -57,7 +73,7 @@ public class CommentServlet extends HttpServlet {
 
 		String text = request.getParameter("text");
 
-		if (StringUtils.isEmpty(text) == true) {
+		if (StringUtils.isEmpty(text)) {
 			comments.add("コメントを入力してください");
 		}
 		if (500< text.length()) {

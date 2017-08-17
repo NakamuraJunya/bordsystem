@@ -67,9 +67,9 @@ public class SettingsServlet extends HttpServlet {
 
 		if (isValid(request, messages) == true) {
 
-			new UserService().register(user);
+			new UserService().update(user);
 
-			response.sendRedirect("settings");
+			response.sendRedirect("usermanagement");
 
 			try {
 				new UserService().update(editUser);
@@ -83,7 +83,6 @@ public class SettingsServlet extends HttpServlet {
 			session.setAttribute("editUser", editUser);
 			session.removeAttribute("editUser");
 
-			response.sendRedirect("usermanagement");
 		} else {
 
 			session.setAttribute("errorMessages", messages);
@@ -128,19 +127,13 @@ public class SettingsServlet extends HttpServlet {
 			messages.add("名前を入力してください");
 		}
 		if (10< name.length()) {
-				messages.add("名前は10文字以内で入力してください");
-		}
-		if (StringUtils.isEmpty(login_id) == true) {
-			messages.add("ログインIDを入力してください");
+			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {
 			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		if  (!login_id.matches("\\w{6,20}")) {
-			messages.add("記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+		if  (!password.matches("\\w{6,20}") &&  password != null) {
+			messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
 		}
 		if (branchId == 0) {
 			messages.add("支店名を選択してください");

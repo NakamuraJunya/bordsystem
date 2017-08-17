@@ -42,6 +42,8 @@ public class UserService {
 		try {
 			connection = getConnection();
 
+			if(!users.getPassword().isEmpty()) {
+
 			String encPassword = CipherUtil.encrypt(users.getPassword());
 			users.setPassword(encPassword);
 
@@ -49,6 +51,7 @@ public class UserService {
 			userDao.update(connection, users);
 
 			commit(connection);
+			}
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

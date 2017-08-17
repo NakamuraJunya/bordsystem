@@ -48,9 +48,11 @@
 					</c:if>
 				</c:forEach>
 				<td>
+				<c:if test="${loginUser.id!=user.id}">
 					<form action = "settings" method = "get" >
 						<button type="submit" name="id" value="${user.id}">編集</button>
 					</form>
+				 </c:if>
 				</td>
 				<td>
 				<script>
@@ -63,9 +65,10 @@
 						window.alert('キャンセルされました'); // 警告ダイアログを表示
 						return false; // 送信を中止
 						}
-						}
+					}
 
 				</script>
+				<c:if test="${loginUser.id!=user.id}">
 				<form action = "isworking" method = "post" onSubmit="return check()" >
 	             <c:if test="${user.is_working == 1}">
 					<button type="submit" name=is_working value="${0}">停止</button>
@@ -77,6 +80,7 @@
 					<input type = hidden name="id" value="${user.id}">
 				 </c:if>
                 </form>
+                </c:if>
 				</td>
 					<tr></tr>
 		 	 </c:forEach>

@@ -58,7 +58,7 @@ public class SignUpServlet extends HttpServlet {
 
 		if (isValid(request, messages) == true) {
 			new UserService().register(user);
-			response.sendRedirect("./");
+			response.sendRedirect("usermanagement");
 
 		} else {
 
@@ -91,17 +91,11 @@ public class SignUpServlet extends HttpServlet {
 		if (10< name.length()) {
 				messages.add("名前は10文字以内で入力してください");
 		}
-		if (StringUtils.isEmpty(login_id) == true) {
-			messages.add("ログインIDを入力してください");
-		}
 		if (!login_id.matches("\\w{6,20}")) {
 				messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
 		}
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
-		if  (!login_id.matches("\\w{6,20}")) {
-			messages.add("記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+		if  (!password.matches("\\w{6,20}")) {
+			messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
 		}
 		if (branch_id == 0  ) {
 			messages.add("支店名を選択してください");

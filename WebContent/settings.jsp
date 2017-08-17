@@ -46,26 +46,24 @@ function check(){
 	<input maxlength='20' name="loginId" value="${editUser.loginId}" />（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード</label>
-	<input maxlength='20' name="password" value="${user.password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="password" value="${password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
 	<label for="password">パスワード確認</label>
-	<input maxlength='20' name="password" value="${user.password}" type="password" id="password"/> <br />
+	<input maxlength='20' name="password" value="${password}" type="password" id="password"/> <br />
 <p></p>
 支店名
 <select name = "selectBranch">
-		<option value="0">支店名を選択してください</option>
     	<c:forEach items="${branchList}" var="branch">
-				<option value="${branch.id}">${branch.name}</option>
-			</c:forEach>
+
+				<option value="${branch.id}" <c:if test="${ branch.id == editUser.branchId }"> selected </c:if>  >${branch.name}</option>
+		</c:forEach>
 </select>
 <p></p>
 部署・役職
 <select name = "selectPosition">
-		<option value="0">部署・役職を選択してください</option>
     	<c:forEach items="${positionList}" var="position">
-					<option value="${position.id}">${position.name}</option>
-
-			</c:forEach>
+			<option value="${position.id}" <c:if test="${ position.id == editUser.positionId }"> selected </c:if> >${position.name}</option>
+		</c:forEach>
 </select>
 <p></p>
 	<button type="submit" name="id" value="${editUser.id}">変更</button>

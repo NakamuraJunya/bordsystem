@@ -118,12 +118,15 @@ public class UserDao {
 				sql.append(", branch_id = ?");
 				sql.append(", position_id = ?");
 				sql.append(" WHERE");
+				if(!users.getPassword().isEmpty()) {
 				sql.append(" id = ?");
-
+				}
 				ps = connection.prepareStatement(sql.toString());
 
 				ps.setString(1, users.getLoginId());
+				if(!users.getPassword().isEmpty()) {
 				ps.setString(2, users.getPassword());
+				}
 				ps.setString(3, users.getName());
 				ps.setInt(4, users.getBranchId());
 				ps.setInt(5, users.getPositionId());

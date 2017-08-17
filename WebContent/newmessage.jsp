@@ -47,7 +47,13 @@
 <label for="title">件名</label>
 <input maxlength='30' name="title"value="${makeMessage.title}" id="title"/>（30文字以内で入力してください)<br />
 <p></p>
-
+既存カテゴリー:
+	<select name = "category" size="1">
+    	<c:forEach items="${categoryList}" var="category">
+			<option value="${category.category}"<c:if test="${ category.category == category.category }"> selected </c:if> >>${category.category}</option>
+		</c:forEach>
+	</select>
+<p></p>
 <label for="category">新規カテゴリー</label>
 <input maxlength='10' name="category"value="${makeMessage.category}" id="category"/>（10文字以内で入力してください）<br />
 <p></p>

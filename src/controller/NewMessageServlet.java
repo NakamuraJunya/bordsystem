@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 
 import beans.Message;
 import beans.User;
+import beans.UserMessage;
 import service.MessageService;
 
 @WebServlet(urlPatterns = { "/newmessage" })
@@ -25,6 +26,9 @@ public class NewMessageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
+		 List<UserMessage> categoryList = new MessageService().getMessageCategory();
+		 request.setAttribute("categoryList", categoryList);
 
 		request.getRequestDispatcher("newmessage.jsp").forward(request, response);
 	}
@@ -56,6 +60,9 @@ public class NewMessageServlet extends HttpServlet {
 
 			request.setAttribute("makeMessage", message);
 
+			List<UserMessage> categoryList = new MessageService().getMessageCategory();
+			request.setAttribute("categoryList", categoryList);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/newmessage.jsp");
 			dispatcher.forward(request,response);
 		}
@@ -80,10 +87,10 @@ public class NewMessageServlet extends HttpServlet {
 			messages.add("カテゴリーは10文字以下で入力してください");
 		}
 		if (StringUtils.isEmpty(text) == true) {
-			messages.add("メッセージを入力してください");
+			messages.add("本文を入力してください");
 		}
 		if (1000< text.length()) {
-			messages.add("メッセージは1000文字以下で入力してください");
+			messages.add("本文は1000文字以下で入力してください");
 		}
 		if (messages.size() == 0) {
 			return true;

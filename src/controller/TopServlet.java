@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +27,6 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String startDate =  request.getParameter("startDate");
 	    String endDate = request.getParameter("endDate");
 	    String category = request.getParameter("category");
@@ -36,7 +35,7 @@ public class TopServlet extends HttpServlet {
 		    startDate = "2017-07-31";
 		}
 		if (StringUtils.isNotBlank(endDate) == false) {
-			endDate = format.format(calendar.getTime());
+			endDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 		}
 
 		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate,category);
@@ -47,7 +46,8 @@ public class TopServlet extends HttpServlet {
 		request.setAttribute("comments", comments);
 		request.setAttribute("categoryList", categoryList);
 
-		request.getRequestDispatcher("/top.jsp").forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/top.jsp");
+		dispatcher.forward(request,response);
 	}
 
 }

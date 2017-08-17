@@ -51,14 +51,14 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			session.setAttribute("loginUser", user);
 			response.sendRedirect("./");
-		} else {
-			request.setAttribute("login_id", login_id);
-			messages.add("ログインに失敗しました。");
+		}
+		if(user == null) {
+			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request,response);
 		}
 	}
-
 }
+
