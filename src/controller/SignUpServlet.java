@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-
 import beans.Branch;
 import beans.Position;
 import beans.User;
@@ -83,7 +81,7 @@ public class SignUpServlet extends HttpServlet {
 		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
 		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
 
-		if (name.length()>10) {
+		if (10<name.length()) {
 			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {

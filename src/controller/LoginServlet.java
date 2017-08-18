@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 
 		String login_id = request.getParameter("login_id");
 		String password = request.getParameter("password");
-		List<String> messages = new ArrayList<String>();
+		List<String> errows = new ArrayList<String>();
 
 		LoginService loginService = new LoginService();
 		User user = loginService.login(login_id, password);
@@ -44,8 +44,8 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("./");
 		}
 		if(user == null) {
-			messages.add("ログインに失敗しました");
-			session.setAttribute("errorMessages", messages);
+			errows.add("ログインに失敗しました");
+			session.setAttribute("errorMessages", errows);
 			session.setAttribute("login_id", login_id);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");

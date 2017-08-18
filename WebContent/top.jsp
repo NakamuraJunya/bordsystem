@@ -90,7 +90,7 @@ function check(){
 
 		【本文】<c:forEach var="text" items="${fn:split(message.text, '
 		')}">
-   					<div>${text}</div>
+   					<div><c:out value="${text}"/></div>
 				</c:forEach><br/><p><p/>
 
 		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
@@ -123,7 +123,7 @@ function check(){
 				【コメント】
 					<c:forEach var="text" items="${fn:split(comment.text, '
 								')}">
-   						<div>${text}</div>
+   						<div><c:out value="${text}"/></div>
 					</c:forEach><br/><p><p/>
 					【投稿者】:<span class="name"><c:out value="${comment.name}" /></span><br/><p><p/>
 					【投稿日時】：<span class="createdAt"><fmt:formatDate value="${comment.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
