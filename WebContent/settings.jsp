@@ -15,7 +15,7 @@
 <script>
 
 function check(){
-	if(window.confirm('入力した内容で変更してもよろしいですか？')){ // 確認ダイアログを表示
+	if(window.confirm('入力した内容で更新してもよろしいですか？')){ // 確認ダイアログを表示
 		return true; // 「OK」時は送信を実行
 	}
 	else{ // 「キャンセル」時の処理
@@ -39,19 +39,21 @@ function check(){
 </div>
 
 <form action = settings  method = "post" onSubmit="return check()"><br/>
-	<label for="name">名前</label>
+	<label for="name">名前:</label>
 	<input maxlength='10' name="name" value="${editUser.name}" />（10文字以内で入力してください）<br />
 <p></p>
-	<label for="loginId">ログインID</label>
+	<label for="loginId">ログインID:</label>
 	<input maxlength='20' name="loginId" value="${editUser.loginId}" />（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
-	<label for="password">パスワード</label>
+	<label for="password">パスワード:</label>
 	<input maxlength='20' name="password" value="${password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
-	<label for="password">パスワード確認</label>
-	<input maxlength='20' name="password" value="${password}" type="password" id="password"/> <br />
+	<label for="nextpassword">確認用パスワード:</label>
+	<input maxlength='20' name="nextpassword" value="${nextpassword}" type="password" id="password"/> <br />
 <p></p>
-支店名
+
+<c:if test="${users.id!=editUser.id}">
+支店名:
 <select name = "selectBranch">
     	<c:forEach items="${branchList}" var="branch">
 
@@ -59,14 +61,15 @@ function check(){
 		</c:forEach>
 </select>
 <p></p>
-部署・役職
+部署・役職:
 <select name = "selectPosition">
     	<c:forEach items="${positionList}" var="position">
 			<option value="${position.id}" <c:if test="${ position.id == editUser.positionId }"> selected </c:if> >${position.name}</option>
 		</c:forEach>
 </select>
+</c:if>
 <p></p>
-	<button type="submit" name="id" value="${editUser.id}">変更</button>
+	<button type="submit" name="id" value="${editUser.id}">登録</button>
 
 </form>
 <p></p>

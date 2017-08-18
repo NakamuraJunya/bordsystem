@@ -33,9 +33,11 @@ public class SettingsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserService userService = new UserService();
 		User editUser = userService.getUser(Integer.parseInt(request.getParameter("id")));
+		User users = (User) session.getAttribute("loginUser");
 
 		session.setAttribute("editUser", editUser);
 		session.setAttribute("id", editUser);
+		session.setAttribute("users", users);
 
 		List<Branch> branchList = new BranchService().getBranch();
 
@@ -52,7 +54,7 @@ public class SettingsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		List<String> messages = new ArrayList<String>();
+		List<String> errors = new ArrayList<String>();
 
 		HttpSession session = request.getSession();
 
@@ -65,18 +67,17 @@ public class SettingsServlet extends HttpServlet {
 		user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
 		user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
 
-		if (isValid(request, messages) == true) {
+		if (isValid(request, errors) == true) {
 
 			new UserService().update(user);
-
 			response.sendRedirect("usermanagement");
 
 			try {
 				new UserService().update(editUser);
 			} catch (NoRowsUpdatedRuntimeException e) {
 				session.removeAttribute("editUser");
-				messages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
-				session.setAttribute("errorMessages", messages);
+				errors.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
+				session.setAttribute("errorMessages", errors);
 				response.sendRedirect("settings");
 			}
 
@@ -85,7 +86,7 @@ public class SettingsServlet extends HttpServlet {
 
 		} else {
 
-			session.setAttribute("errorMessages", messages);
+			session.setAttribute("errorMessages", errors);
 			session.setAttribute("user", user);
 
 			List<Branch> branchList = new BranchService().getBranch();
@@ -120,26 +121,35 @@ public class SettingsServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		String nextpassword = request.getParameter("nextpassword");
 		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
 		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
 
-		if (StringUtils.isEmpty(name) == true) {
-			messages.add("名前を入力してください");
-		}
-		if (10< name.length()) {
+		if (name.length()>10) {
 			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {
 			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
 		}
-		if  (!password.matches("\\w{6,20}") &&  password != null) {
-			messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+		if (StringUtils.isEmpty(password) == false) {
+			if (!password.matches("^[-@+*;:#$%&\\w]{6,20}+$")) {
+				messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
+			}
+		}
+		if (!(password.matches(nextpassword))) {
+			messages.add("入力したパスワードが正しくありません");
 		}
 		if (branchId == 0) {
 			messages.add("支店名を選択してください");
 		}
 		if (positionId == 0) {
 			messages.add("部署・役職を選択してください");
+		}
+		if (branchId==1 && positionId>=3){
+			messages.add("支店、部署・役職の組み合わせが不正です");
+		}
+		if (branchId >=2 && positionId<=2) {
+			messages.add("支店、部署・役職の組み合わせが不正です");
 		}
 		if (messages.size() == 0) {
 			return true;

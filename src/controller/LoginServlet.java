@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
-
 import beans.User;
 import service.LoginService;
 
@@ -41,13 +39,6 @@ public class LoginServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (StringUtils.isEmpty(login_id) == true) {
-			messages.add("ログインIDを入力してください");
-		}
-
-		if (StringUtils.isEmpty(password) == true) {
-			messages.add("パスワードを入力してください");
-		}
 		if (user != null) {
 			session.setAttribute("loginUser", user);
 			response.sendRedirect("./");
@@ -55,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 		if(user == null) {
 			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
+			session.setAttribute("login_id", login_id);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request,response);

@@ -3,6 +3,7 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,13 +54,17 @@ function check(){
 	<form action = "./" method = "get"><font size="4">絞込み検索</font>
 	<p><p/>
 【カテゴリー検索】:
-	<select name = "category" size="1">
-			<option value="">カテゴリーを選択してください</option>
+<select name = "category" size="1">
+	<option value="">カテゴリーを選択してください</option>
     	<c:forEach items="${categoryList}" var="category">
-			<option value="${category.category}"<c:if test="${category.category==true}"> selected </c:if> >${category.category}</option>
+    		<c:if test="${ makeMessage.category == category.category }">
+				<option value="${category.category}" selected>${category.category}</option>
+			</c:if>
+			<c:if test="${ makeMessage.category != category.category }">
+				<option value="${category.category}">${category.category}</option>
+			</c:if>
 		</c:forEach>
 	</select>
-
 
 【日付検索】:
 		<label for="startDate"></label>
@@ -73,17 +78,24 @@ function check(){
 		<button type="submit" >検索</button>
 		<p><p/>
 	</form>
+	<br/>
 
 	<div class="messages">
 
-		<c:forEach items = "${messages}" var = "message">
+		<c:forEach items = "${messages}" var = "message"><br/>
 
 		【件名】：<span class="title"><c:out value="${message.title}" /></span><br/><p><p/>
 
 		【カテゴリー】：<span class="category"><c:out value="${message.category}" /></span><br/><p><p/>
 
-		【本文】:
-				<span class="text"><c:out value="${message.text}" /></span><br/>
+		【本文】<c:forEach var="text" items="${fn:split(message.text, '
+		')}">
+   					<div>${text}</div>
+				</c:forEach><br/><p><p/>
+
+		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
+
+		【投稿日時】：<span class="createdAt"><fmt:formatDate value="${message.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 
 			<form action = "messagedelete" method = "post" onSubmit="return check()" >
 
@@ -104,15 +116,15 @@ function check(){
 
 		 	</form>
 		 	<p><p/>
-		【投稿者】:<span class="name"><c:out value="${message.name}" /></span><br/><p><p/>
 
-		【投稿日時】：<span class="createdAt"><fmt:formatDate value="${message.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
-
-		【コメント一覧】
-			<div class="form-area">
+			<br/>
 			<c:forEach items="${comments}" var="comment">
 				<c:if test="${message.id == comment.messageId}">
-					<span class ="text"> <c:out value ="${comment.text}"/></span><br/><p><p/>
+				【コメント】
+					<c:forEach var="text" items="${fn:split(comment.text, '
+								')}">
+   						<div>${text}</div>
+					</c:forEach><br/><p><p/>
 					【投稿者】:<span class="name"><c:out value="${comment.name}" /></span><br/><p><p/>
 					【投稿日時】：<span class="createdAt"><fmt:formatDate value="${comment.createdAt}" pattern="yyyy/MM/dd HH:mm:ss" /></span><br/><p><p/>
 
@@ -137,8 +149,6 @@ function check(){
 		 			</form>
 				</c:if>
 			</c:forEach>
-		   	</div>
-   	      	<br />
 			<form action="newcomment" method="post">
 				【コメント入力スペース】
          		<input type = hidden name="messageId" value="${message.id}" >

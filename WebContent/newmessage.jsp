@@ -44,20 +44,26 @@
 <form action="newmessage" method="post" onSubmit="return check()">
 
 <p class="form-item">
-<label for="title">件名</label>
+<label for="title">件名:</label>
 <input maxlength='30' name="title"value="${makeMessage.title}" id="title"/>（30文字以内で入力してください)<br />
 <p></p>
 既存カテゴリー:
 	<select name = "category" size="1">
+	<option value="">カテゴリーを選択してください</option>
     	<c:forEach items="${categoryList}" var="category">
-			<option value="${category.category}"<c:if test="${ category.category == category.category }"> selected </c:if> >>${category.category}</option>
+    		<c:if test="${ newMakeMessage == category.category }">
+				<option value="${category.category}" selected>${category.category}</option>
+			</c:if>
+			<c:if test="${ newMakeMessage != category.category }">
+				<option value="${category.category}">${category.category}</option>
+			</c:if>
 		</c:forEach>
 	</select>
 <p></p>
-<label for="category">新規カテゴリー</label>
-<input maxlength='10' name="category"value="${makeMessage.category}" id="category"/>（10文字以内で入力してください）<br />
+<label for="newcategory">新規カテゴリー:</label>
+<input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）<br />
 <p></p>
-<label for="text">本文</label>
+<label for="text">本文:</label>
 <br />
 <textarea maxlength='1000'  name="text" cols="100" rows="5" class="tweet-box">${makeMessage.text}</textarea>
 <br />

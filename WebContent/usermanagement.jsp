@@ -48,17 +48,15 @@
 					</c:if>
 				</c:forEach>
 				<td>
-				<c:if test="${loginUser.id!=user.id}">
 					<form action = "settings" method = "get" >
 						<button type="submit" name="id" value="${user.id}">編集</button>
 					</form>
-				 </c:if>
 				</td>
 				<td>
 				<script>
 
 					function check(){
-						if(window.confirm('選択したアカウントの情報を変更してもよろしいですか？')){ // 確認ダイアログを表示
+						if(window.confirm('選択したアカウントを変更してもよろしいですか？')){ // 確認ダイアログを表示
 							return true; // 「OK」時は送信を実行
 						}
 						else{ // 「キャンセル」時の処理

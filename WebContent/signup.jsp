@@ -36,21 +36,21 @@ function check(){
 
 </script>
 <form action="signup" method="post" onSubmit="return check()"><br />
-	<label for="name">名前</label>
+	<label for="name">名前:</label>
 	<input maxlength='10' name="name" value="${user.name}" id="name"/>（10文字以内で入力してください）<br />
 <p></p>
-	<label for="loginId">ログインID</label>
+	<label for="loginId">ログインID:</label>
 	<input maxlength='20' name="loginId"value="${user.loginId}" id="loginId"/>（半角英数字6文字以上20文字以下で入力してください）<br />
 <p></p>
-	<label for="password">パスワード</label>
+	<label for="password">パスワード:</label>
 
-	<input maxlength='20' name="password"value="${user.password}" type="password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
+	<input maxlength='20' name="password"value="${password}"  type= "password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 <p></p>
-	<label for="password">確認用パスワード</label>
+	<label for="nextpassword">確認用パスワード:</label>
 
-	<input maxlength='20' name="password"value="${user.password}" type="password" id="password"/> <br />
+	<input maxlength='20' name="nextpassword"value="${nextpassword}"  type= "password" id="password"/> <br />
 <p></p>
-支店名
+支店名:
 <select name = "selectBranch">
 		<option value="0">支店名を選択してください</option>
     	<c:forEach items="${branchList}" var="branch">
@@ -58,7 +58,7 @@ function check(){
 			</c:forEach>
 </select>
 <p></p>
-部署・役職
+部署・役職:
 <select name = "selectPosition">
 		<option value="0">部署・役職を選択してください</option>
     	<c:forEach items="${positionList}" var="position">

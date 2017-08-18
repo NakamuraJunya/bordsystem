@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -44,9 +43,7 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<String> messages = new ArrayList<String>();
-
-		HttpSession session = request.getSession();
+		List<String> errors = new ArrayList<String>();
 
 		User user = new User();
 		user.setName(request.getParameter("name"));
@@ -56,14 +53,14 @@ public class SignUpServlet extends HttpServlet {
 		user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
 
 
-		if (isValid(request, messages) == true) {
+		if (isValid(request, errors) == true) {
 			new UserService().register(user);
 			response.sendRedirect("usermanagement");
 
 		} else {
 
-			session.setAttribute("errorMessages", messages);
-			session.setAttribute("user", user);
+			request.setAttribute("errorMessages", errors);
+			request.setAttribute("user", user);
 
 			List<Branch> branchList = new BranchService().getBranch();
 
@@ -82,26 +79,33 @@ public class SignUpServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		int branch_id = Integer.parseInt(request.getParameter("selectBranch"));
-		int position_id = Integer.parseInt(request.getParameter("selectPosition"));
+		String nextpassword = request.getParameter("nextpassword");
+		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
+		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
 
-		if (StringUtils.isEmpty(name) == true) {
-			messages.add("名前を入力してください");
-		}
-		if (10< name.length()) {
-				messages.add("名前は10文字以内で入力してください");
+		if (name.length()>10) {
+			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {
-				messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
+			messages.add("ログインIDは半角英数字6文字以上20文字以内で入力してください");
 		}
-		if  (!password.matches("\\w{6,20}")) {
+		if (!password.matches("^[-@+*;:#$%&\\w]{6,20}+$")) {
 			messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
 		}
-		if (branch_id == 0  ) {
+		if (!(password.matches(nextpassword))) {
+			messages.add("入力したパスワードが正しくありません");
+		}
+		if (branchId == 0  ) {
 			messages.add("支店名を選択してください");
 		}
-		if (position_id == 0) {
+		if (positionId == 0) {
 			messages.add("部署・役職を選択してください");
+		}
+		if (branchId==1 && positionId>=3){
+			messages.add("支店、部署・役職の組み合わせが不正です");
+		}
+		if (branchId >=2 && positionId<=2) {
+			messages.add("支店、部署・役職の組み合わせが不正です");
 		}
 		if (messages.size() == 0) {
 			return true;
@@ -109,5 +113,5 @@ public class SignUpServlet extends HttpServlet {
 			return false;
 		}
 	}
-
 }
+

@@ -39,26 +39,40 @@ public class NewMessageServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		List<String> messages = new ArrayList<String>();
+		List<String> errows = new ArrayList<String>();
 		User users = (User) session.getAttribute("loginUser");
 
 		Message message = new Message();
 		message.setTitle(request.getParameter("title"));
 		message.setText(request.getParameter("text"));
-		message.setCategory(request.getParameter("category"));
+		if (StringUtils.isBlank(request.getParameter("category")) == true) {
+
+			message.setCategory(request.getParameter("newCategory"));
+		}
+//		if (StringUtils.isBlank(request.getParameter("newCategory")) == true) {
+//
+//			message.setCategory(request.getParameter("category"));
+//		}
 		message.setUserId(users.getId());
 		message.setBranchId(users.getBranchId());
 		message.setPositionId(users.getPositionId());
 
-		if (isValid(request, messages) == true) {
+		if (isValid(request, errows) == true) {
+			if (StringUtils.isBlank(request.getParameter("newCategory")) == true) {
+
+				message.setCategory(request.getParameter("category"));
+			}
 
 			new MessageService().register(message);
 
 			response.sendRedirect("./");
 		} else {
-			session.setAttribute("errorMessages", messages);
+			message.setCategory(request.getParameter("newCategory"));
+			session.setAttribute("errorMessages", errows);
 
 			request.setAttribute("makeMessage", message);
+
+			request.setAttribute("newMakeMessage", (request.getParameter("category")));
 
 			List<UserMessage> categoryList = new MessageService().getMessageCategory();
 			request.setAttribute("categoryList", categoryList);
@@ -80,11 +94,14 @@ public class NewMessageServlet extends HttpServlet {
 		if (30< title.length()) {
 			messages.add("件名は30文字以下で入力してください");
 		}
-		if (StringUtils.isEmpty(category) == true) {
-			messages.add("カテゴリーを入力してください");
+		if (StringUtils.isBlank(request.getParameter("newCategory")) == true && StringUtils.isEmpty(category) == true) {
+			messages.add("カテゴリーは新規もしくは既存のどちらかの入力が必要です");
 		}
 		if (10< category.length()) {
 			messages.add("カテゴリーは10文字以下で入力してください");
+		}
+		if(StringUtils.isBlank(request.getParameter("newCategory")) == false && StringUtils.isBlank(category) == false) {
+			messages.add("カテゴリーは新規もしくは既存のどちらかの選択のみです");
 		}
 		if (StringUtils.isEmpty(text) == true) {
 			messages.add("本文を入力してください");
