@@ -22,6 +22,8 @@ public class LoginService {
 			User user = userDao
 					.getUser(connection, login_id, encPassword);
 
+			System.out.println(user);
+
 			commit(connection);
 
 			return user;

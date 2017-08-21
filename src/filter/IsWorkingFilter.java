@@ -10,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
@@ -23,15 +22,16 @@ public class IsWorkingFilter implements Filter {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		User user = (User) session.getAttribute("loginUser");
 
-		if (user != null){
-			session.getAttribute("loginUser");
+//		if (user.getIs_working() !=1 && !((HttpServletRequest) request).getServletPath().equals("/login")) {
+//
+//			((HttpServletResponse) response).sendRedirect("login");
+//			return;
+//		}
+//		if (user != null){
+//			HttpSession nextsession = ((HttpServletRequest)request).getSession();
+//			User nextuser = (User) nextsession.getAttribute("loginUser");
+//		}
 
-			if (user.getIs_working() ==0 && !((HttpServletRequest) request).getServletPath().equals("/login")) {
-
-				((HttpServletResponse) response).sendRedirect("login");
-				return;
-			}
-		}
 		chain.doFilter(request, response);
 	}
 

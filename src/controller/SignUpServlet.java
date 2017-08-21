@@ -91,7 +91,7 @@ public class SignUpServlet extends HttpServlet {
 			messages.add("パスワードは記号を含む全ての半角文字6文字以上20文字以下で入力してください");
 		}
 		if (!(password.matches(nextpassword))) {
-			messages.add("入力したパスワードが正しくありません");
+			messages.add("入力したパスワードが一致しません");
 		}
 		if (branchId == 0  ) {
 			messages.add("支店名を選択してください");

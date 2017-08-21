@@ -7,20 +7,35 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
     <title>ユーザー管理画面</title>
+    <style type="text/css">
+body {
+  background: linear-gradient(to right, gold 0%, orange 100%);/*正規の指定*/
+}
+	</style>
 </head>
 <body>
+	<div id="menu">
+	<ul>
+	<li>	<a href="./">ホーム</a></li>
+	<li>	<a href="signup">ユーザー登録</a></li>
+	</ul>
 	<div class="header">
-		<a href="./">ホーム</a>
-		<a href="signup">新規ユーザー登録</a>
-		<a href="logout">ログアウト</a>
+	<ul>
+	<li>	<a href="logout">ログアウト</a></li>
+	</ul>
 	</div>
-	<p></p>
+	</div>
+<p></p>
+
 	<div class="profile">
 		現在、<span class="name"><c:out value="${loginUser.name}" /> でログイン中です</span>
 	</div>
-	<p></p>
+
+
 	<font size="5">ユーザー管理</font>
+		<div class="main-contents">
 
 	<table border=1>
 		<tr>
@@ -28,6 +43,8 @@
 		<th>【ログインID】</th>
 		<th>【支店名】</th>
 		<th>【部署・役職】</th>
+		<th>【編集項目】</th>
+		<th>【復活・停止】</th>
 		</tr>
 		<tr>
 			<c:forEach items="${users}" var="user">
@@ -79,6 +96,9 @@
 				 </c:if>
                 </form>
                 </c:if>
+                <c:if test="${loginUser.id==user.id}">
+                	ログイン中
+                 </c:if>
 				</td>
 					<tr></tr>
 		 	 </c:forEach>
@@ -87,6 +107,6 @@
 
 	</table>
 	<p></p>
-	<div class="copyright">Copyright(c)Junya Nakamura</div>
+	</div>
 </body>
 </html>

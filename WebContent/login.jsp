@@ -7,12 +7,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ログイン画面</title>
-
 </head>
 <body>
-<div class="main-contents">
-
 <p><font size="5">商売繁盛掲示板</font></p>
+
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -31,11 +29,12 @@
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
-
+	<p></p>
 	<input type="submit" value="ログイン" /> <br />
 </form>
 <p></p>
+
 <div class="copyright">Copyright(c)Junya Nakamura</div>
-</div>
+
 </body>
 </html>

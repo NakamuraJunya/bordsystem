@@ -38,6 +38,7 @@ public class TopServlet extends HttpServlet {
 			endDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 		}
 
+
 		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate,category);
 		List<UserComment> comments = new CommentService().getComment();
 		List<UserMessage> categoryList = new MessageService().getMessageCategory();

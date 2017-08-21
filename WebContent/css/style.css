@@ -1,0 +1,237 @@
+body {
+	background-color: white;
+}
+
+.main-contents {
+	margin-top: 0%;
+	margin-bottom: 10%;
+	margin-left: 10%;
+	margin-right: 100%;
+	background-color: linear-gradient(to bottom, gold 0%, orange 100%);
+	height: 100%;
+	width: 80%;
+}
+
+select{
+	height: 24px;
+	width: 150.00px;
+}
+
+.left{
+	text-aline:left;
+	line-height:250%;
+}
+
+.center{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.box26 {
+    position: relative;
+    margin: 2% 65% 0% 0%;
+    padding: 0% 0%;
+    border: solid 3px #95ccff;
+    border-radius: 0%;
+}
+.box26 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.box27 p {
+    margin: 0;
+    padding: 0;
+}
+.box27 {
+    position: relative;
+    margin: 2% 0% 0% 0%;
+    padding: 0% 0%;
+    border: solid 3px #95ccff;
+    border-radius: 0%;
+}
+.box27 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -6%;
+    left: 1%;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.box27
+ p {
+    margin: 0;
+    padding: 0;
+}.box28 {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+}
+.box28 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.box28 p {
+    margin: 0;
+    padding: 0;
+}
+.box29 {
+    margin: 2em 0;
+    background: #dcefff;
+}
+.box29 .box-title {
+    font-size: 1.2em;
+    background: #5fb3f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.box29 p {
+    padding: 15px 20px;
+    margin: 0;
+}
+.sample-box-1 {
+    background-color: rgba(249, 54, 10, 0.96);
+    border: 2px dashed #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 4px#fd4d0d;
+    color: #fff;
+    margin: 2em 0;
+    padding: 2em;
+}
+.box {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 0%;
+	background: linear-gradient(#FFF 0%, #CCC 100%);
+	box-shadow: 0 0 3px black;
+}
+.box .thumbnail {
+	margin: 0 auto;
+	width: 100%;
+	height: 30%;
+	overflow: hidden;
+}
+.box img {
+	width: 0%;
+}
+.box p {
+	text-align: center;
+	color: #444;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+.ribbon {
+	position: absolute;
+	top: 20%;
+	left: 0%;
+	width: 30%;
+	height: 30%;
+	line-height: 200%;
+	background: linear-gradient(yellow 0%, orange 100%);
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	text-shadow: 0 0 3px black;
+	box-shadow: 0 0 3px black;
+	-webkit-transform: rotate(-45deg) translate(-70px,-70px);
+	   -moz-transform: rotate(-45deg) translate(-70px,-70px);
+	    -ms-transform: rotate(-45deg) translate(-70px,-70px);
+	     -o-transform: rotate(-45deg) translate(-70px,-70px);
+	        transform: rotate(-45deg) translate(-70px,-70px);
+}
+
+#menu ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#menu li{
+	display: inline;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+
+#menu li a{
+	display: block;
+	width: 90%;
+	padding: 3px;
+	margin: 10px 0px 10px 0px;
+	text-decoration: none;
+	border:outset 3px #C2CBBD;
+	background-color: #d2caba;
+	text-align: center;
+	color: #000000;
+	font-size: 14px;
+}
+
+#menu li a:hover{
+	border: inset 3px #95A38D;
+	background-color: #95A38D;
+}
+
+.tweet-box {
+	width: 780px;
+	height: 56px;
+}
+
+.header {
+	float: right;
+}
+.leftheader {
+	text-align: left;
+}
+
+.profile {
+	margin-top: 0%;
+	margin-right: 0%;
+	margin-bottom: 5%;
+	margin-left: 40%;
+	height: 10%;
+}
+
+.form-area {
+	margin-top: 00px;
+	margin-right: 00px;
+	margin-bottom: 00px;
+	margin-left: 300px;
+	background-color: linear-gradient(to bottom, gold 0%, orange 100%);
+}
+.copyright {
+	width: 250%;
+	margin: 0 auto;
+}
+
+.errorMessages {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	color: red;
+}

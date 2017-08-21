@@ -7,11 +7,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="./css/style.css" rel="stylesheet" type="text/css">
 	<title>新規投稿画面</title>
+    <style type="text/css">
+body {
+  background: linear-gradient(to right, gold 0%, orange 100%);/*正規の指定*/
+}
+	</style>
 </head>
 <body>
-<a href="./">ホーム</a>
-
+<div class="form-area">
 <p><font size="5">新規投稿</font></p>
 
 <div>
@@ -40,7 +45,7 @@
 
 	</script>
 
-<div class="form-area">
+
 <form action="newmessage" method="post" onSubmit="return check()">
 
 <p class="form-item">
@@ -49,7 +54,7 @@
 <p></p>
 既存カテゴリー:
 	<select name = "category" size="1">
-	<option value="">カテゴリーを選択してください</option>
+	<option value="">既存カテゴリー選択</option>
     	<c:forEach items="${categoryList}" var="category">
     		<c:if test="${ newMakeMessage == category.category }">
 				<option value="${category.category}" selected>${category.category}</option>
@@ -61,7 +66,7 @@
 	</select>
 <p></p>
 <label for="newcategory">新規カテゴリー:</label>
-<input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）<br />
+<input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）
 <p></p>
 <label for="text">本文:</label>
 <br />
@@ -70,8 +75,12 @@
 <p></p>
 <input type="submit" value="投稿">（1000文字以内で入力してください）
 </form>
-</div>
+
 <p></p>
-<div class="copyright">Copyright(c)Junya Nakamura</div>
+	<a href="./">ホームに戻る</a>
+
+<p></p>
+<p></p>
+	</div>
 </body>
 </html>

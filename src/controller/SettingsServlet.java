@@ -137,7 +137,7 @@ public class SettingsServlet extends HttpServlet {
 			}
 		}
 		if (!(password.matches(nextpassword))) {
-			messages.add("入力したパスワードが正しくありません");
+			messages.add("入力したパスワードが一致しません");
 		}
 		if (branchId == 0) {
 			messages.add("支店名を選択してください");
