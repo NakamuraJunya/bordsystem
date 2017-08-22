@@ -45,6 +45,11 @@ body {
 
 	</script>
 
+		<script type="text/javascript">
+			function CountDownLength( idn, str, mnum ) {
+  			 document.getElementById(idn).innerHTML = "あと" + (mnum - str.length) + "文字";
+			}
+		</script>
 
 <form action="newmessage" method="post" onSubmit="return check()">
 
@@ -68,12 +73,12 @@ body {
 <label for="newcategory">新規カテゴリー:</label>
 <input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）
 <p></p>
-<label for="text">本文:</label>
+<label for="text">本文:</label>（1000文字以内で入力してください）
 <br />
-<textarea maxlength='1000'  name="text" cols="100" rows="5" class="tweet-box">${makeMessage.text}</textarea>
-<br />
+<textarea maxlength='1000' name="text" cols="100" rows="5" class="tweet-box" onkeyup="CountDownLength( 'cdlength1' , value , 1000 );">${makeMessage.text}</textarea>
+<p id="cdlength1">残り1000文字</p><br />
 <p></p>
-<input type="submit" value="投稿">（1000文字以内で入力してください）
+<button type="submit" value="投稿">投稿</button>
 </form>
 
 <p></p>

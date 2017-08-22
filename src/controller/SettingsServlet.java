@@ -32,6 +32,19 @@ public class SettingsServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		UserService userService = new UserService();
+
+		if((StringUtils.isNotBlank(request.getParameter("id")) == false) ||
+			(!request.getParameter("id").matches("^[0-9]+$") ||
+					userService.getUser(Integer.parseInt(request.getParameter("id"))) == null)){
+
+			List<String> errors = new ArrayList<String>();
+			errors.add("不正なURLが入力されました");
+			session.setAttribute("errorMessages", errors);
+			response.sendRedirect("usermanagement");
+
+			return;
+		}
+
 		User editUser = userService.getUser(Integer.parseInt(request.getParameter("id")));
 		User users = (User) session.getAttribute("loginUser");
 
@@ -60,20 +73,13 @@ public class SettingsServlet extends HttpServlet {
 
 		User editUser = getEditUser(request);
 
-		User user = new User();
-		user.setName(request.getParameter("name"));
-		user.setLoginId(request.getParameter("loginId"));
-		user.setPassword(request.getParameter("password"));
-		user.setBranchId(Integer.parseInt(request.getParameter("selectBranch")));
-		user.setPositionId(Integer.parseInt(request.getParameter("selectPosition")));
-
 		if (isValid(request, errors) == true) {
 
-			new UserService().update(user);
-			response.sendRedirect("usermanagement");
-
 			try {
+
 				new UserService().update(editUser);
+				response.sendRedirect("usermanagement");
+
 			} catch (NoRowsUpdatedRuntimeException e) {
 				session.removeAttribute("editUser");
 				errors.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
@@ -87,7 +93,7 @@ public class SettingsServlet extends HttpServlet {
 		} else {
 
 			session.setAttribute("errorMessages", errors);
-			session.setAttribute("user", user);
+			session.setAttribute("editUser", editUser);
 
 			List<Branch> branchList = new BranchService().getBranch();
 
@@ -124,8 +130,18 @@ public class SettingsServlet extends HttpServlet {
 		String nextpassword = request.getParameter("nextpassword");
 		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
 		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
+		int id =(Integer.parseInt(request.getParameter("id")));
 
+		UserService userService = new UserService();
+		User user = userService.getUser(login_id);
+
+		if (user != null && id != user.getId()) {
+			messages.add("このログインIDはすでに使用されています");
+		}
 		if (10<name.length()) {
+			messages.add("名前は10文字以内で入力してください");
+		}
+		if (name == null) {
 			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {

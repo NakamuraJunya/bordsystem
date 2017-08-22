@@ -29,7 +29,9 @@ public class TopServlet extends HttpServlet {
 
 		String startDate =  request.getParameter("startDate");
 	    String endDate = request.getParameter("endDate");
-	    String category = request.getParameter("category");
+		request.setAttribute("startDate", startDate);
+		request.setAttribute("endDate", endDate);
+	    String category = "";
 
 		if (StringUtils.isNotBlank(startDate) == false) {
 		    startDate = "2017-07-31";
@@ -37,7 +39,10 @@ public class TopServlet extends HttpServlet {
 		if (StringUtils.isNotBlank(endDate) == false) {
 			endDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 		}
-
+		if (StringUtils.isNotBlank(request.getParameter("category")) == true) {
+			category = request.getParameter("category");
+			request.setAttribute("selectCatogory", category);
+		}
 
 		List<UserMessage> messages = new MessageService().getMessage(startDate,endDate,category);
 		List<UserComment> comments = new CommentService().getComment();

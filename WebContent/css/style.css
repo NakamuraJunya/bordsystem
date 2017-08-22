@@ -1,6 +1,80 @@
 body {
-	background-color: white;
+	background-color: red;
 }
+
+button {
+	width: 50%;
+  height: 100%;
+}
+
+button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+}
+
+h1 {
+  position: relative;
+  padding: .3em;
+  background-color: #dcefff;
+}
+h1 span {
+  display: block;
+  padding: 0% 41%;
+  border: 1px dashed #ccc;
+}
+h2{
+position: relative;
+color: black;
+background: #d0ecff;
+line-height: 1.4;
+padding: 0.25em 0.5em;
+margin: 2em 0 0.5em;
+border-radius: 0 5px 5px 5px;
+}
+
+h2:after {/*ƒ^ƒu*/
+  position: absolute;
+  font-family: FontAwesome,'Quicksand','Avenir','Arial',sans-serif;
+  content: '\f00c Check';
+background: #2196F3;
+color: #fff;
+left: 0px;
+
+bottom: 100%;
+border-radius: 5px 5px 0 0;
+padding: 3px 7px 1px;
+ 	font-size: 0.7em;
+ 	line-height: 1;
+ 	letter-spacing: 0.05em
+  }
 
 .main-contents {
 	margin-top: 0%;
@@ -13,34 +87,94 @@ body {
 }
 
 select{
-	height: 24px;
-	width: 150.00px;
+	height: 0%;
+	width: 30%;
 }
 
 .left{
 	text-aline:left;
 	line-height:250%;
 }
-
+.right {
+	text-aline:right;
+    line-height:250%;
+}
 .center{
   height: 100%;
   width: 100%;
   text-align: center;
 }
+.ribbon_box {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 300px;
+    background: #f1f1f1;
+}
+.ribbon18 {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    margin: 0;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: white;
+    background: #ff7470;
+    box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+.ribbon18:before {
+    position: absolute;
+    content: '';
+    top: -8px;
+    left: -7px;
+    border: none;
+    height: 38px;
+    width: 7px;
+    background: #ff7470;
+    border-radius: 5px 0 0 5px;
+}
+.ribbon18:after {
+    position: absolute;
+    content: '';
+    top: -7px;
+    left: -5px;
+    border: none;
+    height: 7px;
+    width: 5px;
+    background: #b25552;
+    border-radius: 5px 0 0 5px;
+}
+.box14{
+    padding: 0% 0%;
+    margin: 0% 15%;
+    background: #d6ebff;
+    box-shadow: 0px 0px 0px 10px #d6ebff;
+    border: dashed 2px white;
+}
+.box14 p {
+    margin: 0% 10%;
+    padding: 0%;
+}
 .box26 {
     position: relative;
-    margin: 2% 65% 0% 0%;
-    padding: 0% 0%;
+    margin: 3% 65% 3% 0%;
+    padding: 0% 1%;
     border: solid 3px #95ccff;
     border-radius: 0%;
 }
 .box26 .box-title {
     position: absolute;
     display: inline-block;
-    top: -13px;
-    left: 10px;
+    top: -117%;
+    left: 0%;
     padding: 0 9px;
-    line-height: 1;
+    line-height: 100%;
     font-size: 19px;
     background: #FFF;
     color: #95ccff;
@@ -52,16 +186,16 @@ select{
 }
 .box27 {
     position: relative;
-    margin: 2% 0% 0% 0%;
-    padding: 0% 0%;
+    margin: 2% 20% 0% 0%;
+    padding: 5% 0%;
     border: solid 3px #95ccff;
     border-radius: 0%;
 }
 .box27 .box-title {
     position: absolute;
     display: inline-block;
-    top: -6%;
-    left: 1%;
+    top: -13%;
+    left: 0%;
     padding: 0 9px;
     line-height: 1;
     font-size: 19px;
@@ -75,6 +209,13 @@ select{
     padding: 0;
 }.box28 {
     position: relative;
+    margin: 0% 20% 0% 0%;
+    padding: 0.5em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+}
+.box28 {
+    position: relative;
     margin: 2em 0;
     padding: 0.5em 1em;
     border: solid 3px #95ccff;
@@ -83,8 +224,8 @@ select{
 .box28 .box-title {
     position: absolute;
     display: inline-block;
-    top: -13px;
-    left: 10px;
+    top: -40%;
+    left: 0%;
     padding: 0 9px;
     line-height: 1;
     font-size: 19px;
@@ -97,7 +238,7 @@ select{
     padding: 0;
 }
 .box29 {
-    margin: 2em 0;
+    margin: 5% 8%;
     background: #dcefff;
 }
 .box29 .box-title {
@@ -148,7 +289,7 @@ select{
 .ribbon {
 	position: absolute;
 	top: 20%;
-	left: 0%;
+	left: -4%;
 	width: 30%;
 	height: 30%;
 	line-height: 200%;

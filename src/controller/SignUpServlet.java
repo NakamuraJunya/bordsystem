@@ -81,6 +81,12 @@ public class SignUpServlet extends HttpServlet {
 		int branchId = Integer.parseInt(request.getParameter("selectBranch"));
 		int positionId = Integer.parseInt(request.getParameter("selectPosition"));
 
+		UserService userService = new UserService();
+		User user = userService.getUser(login_id);
+
+		if (user != null) {
+			messages.add("このログインIDはすでに使用されています");
+		}
 		if (10<name.length()) {
 			messages.add("名前は10文字以内で入力してください");
 		}

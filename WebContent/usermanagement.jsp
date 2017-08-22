@@ -33,6 +33,16 @@ body {
 		現在、<span class="name"><c:out value="${loginUser.name}" /> でログイン中です</span>
 	</div>
 
+	<c:if test="${ not empty errorMessages }">
+		<div class="errorMessages">
+			<ul>
+				<c:forEach items="${errorMessages}" var="message">
+					<li><c:out value="${message}" />
+				</c:forEach>
+			</ul>
+		</div>
+		<c:remove var="errorMessages" scope="session"/>
+	</c:if>
 
 	<font size="5">ユーザー管理</font>
 		<div class="main-contents">

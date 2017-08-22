@@ -53,7 +53,7 @@ function check(){
 
 	<input maxlength='20' name="password"value="${password}"  type= "password" id="password"/>（記号を含む全ての半角文字6文字以上20文字以下で入力してください）<br />
 
-	<label for="nextpassword">確認用パスワード:</label>
+	<label for="nextpassword">パスワード（再入力）:</label>
 
 	<input maxlength='20' name="nextpassword"value="${nextpassword}"  type= "password" id="password"/> <br />
 
@@ -72,9 +72,10 @@ function check(){
 			<option value="${position.id}"<c:if test="${ position.id == user.positionId }"> selected </c:if>>${position.name}</option>
 		</c:forEach>
 </select>
-
-<input type="submit" value="登録" /> <br />
+<p></p>
+<button type="submit" value="登録" />登録</button><br />
 </form>
+<p></p>
 <a href="usermanagement">ユーザー管理に戻る</a>
 </div>
 </body>

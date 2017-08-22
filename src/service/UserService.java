@@ -38,6 +38,7 @@ public class UserService {
 
 	public void update(User users) {
 
+
 		Connection connection = null;
 		try {
 			connection = getConnection();
@@ -46,12 +47,11 @@ public class UserService {
 
 			String encPassword = CipherUtil.encrypt(users.getPassword());
 			users.setPassword(encPassword);
-
+			}
 			UserDao userDao = new UserDao();
 			userDao.update(connection, users);
 
 			commit(connection);
-			}
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -116,6 +116,29 @@ public class UserService {
 			UserDao UserDao = new UserDao();
 			User user = UserDao
 					.getUser(connection, id);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+	public User getUser(String login_id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao UserDao = new UserDao();
+			User user = UserDao
+					.getUser(connection, login_id);
 
 			commit(connection);
 

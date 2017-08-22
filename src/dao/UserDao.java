@@ -107,32 +107,39 @@ public class UserDao {
 		}
 	}
 		public void update(Connection connection, User users) {
+			System.out.println("bbb");
 
 			PreparedStatement ps = null;
-			try {
+			try {System.out.println("aaa");
 				StringBuilder sql = new StringBuilder();
 				sql.append("UPDATE users SET");
 				sql.append("  login_id = ?");
+				if(!users.getPassword().isEmpty()) {
 				sql.append(", password = ?");
+				}
 				sql.append(", name = ?");
 				sql.append(", branch_id = ?");
 				sql.append(", position_id = ?");
 				sql.append(" WHERE");
-				if(!users.getPassword().isEmpty()) {
 				sql.append(" id = ?");
-				}
+
 				ps = connection.prepareStatement(sql.toString());
 
 				ps.setString(1, users.getLoginId());
 				if(!users.getPassword().isEmpty()) {
 				ps.setString(2, users.getPassword());
-				}
 				ps.setString(3, users.getName());
 				ps.setInt(4, users.getBranchId());
 				ps.setInt(5, users.getPositionId());
 				ps.setInt(6, users.getId());
+				}else{
+					ps.setString(2, users.getName());
+					ps.setInt(3, users.getBranchId());
+					ps.setInt(4, users.getPositionId());
+					ps.setInt(5, users.getId());
+				}
 
-				System.out.println(ps.toString());
+				System.out.println(ps);
 
 				ps.executeUpdate();
 
@@ -190,8 +197,6 @@ public class UserDao {
 			close(ps);
 		}
 	}
-
-
 	public User getUser(Connection connection, int id) {
 		PreparedStatement ps = null;
 		try {
@@ -199,6 +204,27 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if (userList.isEmpty() == true) {
+				return null;
+			} else {
+				return userList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	public User getUser(Connection connection, String login_id) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE login_id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, login_id);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
