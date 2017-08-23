@@ -1,22 +1,108 @@
 body {
-	background-color: red;
+  			  background: -webkit-linear-gradient(-45deg,  rgba(61,104,153,1) 0%,rgba(32,124,202,1) 2%,rgba(32,124,202,1)
+  			   13%,rgba(32,124,202,1) 34%,rgba(96,161,214,1) 53%,rgba(32,124,202,1)
+  			   77%,rgba(41,137,216,1) 93%,rgba(125,185,232,1) 100%);
+	}
+bg-metal-blue {
+	 background: -webkit-linear-gradient(-45deg,  rgba(61,104,153,1) 0%,rgba(32,124,202,1) 2%,rgba(32,124,202,1)
+	  13%,rgba(32,124,202,1) 34%,rgba(96,161,214,1) 53%,rgba(32,124,202,1)
+	   77%,rgba(41,137,216,1) 93%,rgba(125,185,232,1) 100%);
+}
+.colour-4 {
+  background: #8d78b1;
+  a {
+    border: 2px solid #fff;
+    border-radius: 50px;
+    background-image: linear-gradient(-135deg, #fff, #fff 50%, #8d78b1 50%, #8d78b1);
+    background-size: 100% 500%;
+    background-position: bottom;
+    transition: all 0.4s ease;
+  }
+  a:hover {
+    background-position: top;
+    color: #8d78b1;
+  }
+}
+
+.menu {
+   list-style:none;
+   padding:0;
+   margin:0;
+   overflow: hidden;
+   position: relative;
+}
+.menu li {
+   width:190px;/*繝｡繝九Η繝ｼ縺ｮ蟷�*/
+   background:gold;
+   position: relative;
+   height:50px;/*繝｡繝九Η繝ｼ縺ｮ鬮倥＆*/
+}
+.menu li a {
+   text-decoration:none;
+   color:red;
+   font-size:12px;
+   display:block;
+   padding:0 20%;
+   height:-1%;
+   line-height:49px;
+   border-bottom:1px solid #fff;
+   color:#5B6F25;
+   font-weight:bold;
+}
+.menu li ul {
+   margin:0;
+   padding:0;
+}
+.menu li ul li {
+   background:rgb(253, 226, 78);
+}
+.menu li ul li a {
+   color:#9e9478;
+}
+.menu .drop_2row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�2縺､縺ｮ縺ｨ縺�*/
+   height:150px;
+}
+.menu .drop_3row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�3縺､縺ｮ縺ｨ縺�*/
+   height:200px;
+}
+.menu .drop_4row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�4縺､縺ｮ縺ｨ縺�*/
+   height:250px;
+}
+.menu * {/*繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ*/
+   -moz-transition: .5s;
+   -webkit-transition: .5s;
+   -o-transition: .5s;
+   -ms-transition: .5s;
+   transition: .5s;
+}
+h3 {
+    font-size: 18px !important;
+    color: #333333 !important;
+    margin: 0% -12.5% 8% -12.5% !important;
+    padding: 0% 0% 0% 47%!important;
+    border: 1px solid #cccccc !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #cccccc 100%) !important;
 }
 
 button {
 	width: 50%;
-  height: 100%;
+  height: 50%;
 }
 
 button {
-  height: 100%;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 button {
-  width: 140px;
+  width: 10%;
   height: 45px;
+  margin: 0% 0% 0% 85%;
   font-family: 'Roboto', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
@@ -60,7 +146,7 @@ margin: 2em 0 0.5em;
 border-radius: 0 5px 5px 5px;
 }
 
-h2:after {/*�^�u*/
+h2:after {/*ﾆ耽ﾆ置*/
   position: absolute;
   font-family: FontAwesome,'Quicksand','Avenir','Arial',sans-serif;
   content: '\f00c Check';
@@ -78,7 +164,7 @@ padding: 3px 7px 1px;
 
 .main-contents {
 	margin-top: 0%;
-	margin-bottom: 10%;
+	margin-bottom: 20%;
 	margin-left: 10%;
 	margin-right: 100%;
 	background-color: linear-gradient(to bottom, gold 0%, orange 100%);
@@ -152,7 +238,7 @@ select{
 }
 .box14{
     padding: 0% 0%;
-    margin: 0% 15%;
+    margin: 5% 8%;
     background: #d6ebff;
     box-shadow: 0px 0px 0px 10px #d6ebff;
     border: dashed 2px white;
@@ -336,6 +422,58 @@ select{
 	border: inset 3px #95A38D;
 	background-color: #95A38D;
 }
+table.type12 {
+
+    border-collapse: separate;
+
+    border-spacing: 3px;
+
+    text-align: center;
+
+    line-height: 1.5;
+
+}
+
+table.type12 th {
+
+    width: 155px;
+
+    padding: 10px;
+
+    font-weight: bold;
+
+    vertical-align: top;
+
+    color: #fff;
+
+    background: #666;
+
+}
+
+table.type12 td {
+
+    width: 155px;
+
+    padding: 30px 10px;
+
+    vertical-align: top;
+
+    background: #eee;
+
+}
+
+table.type12 th.col01 {background: #060;}
+
+table.type12 td.col01 {background: #cfc;}
+
+table.type12 th.col02 {background: #f60;}
+
+table.type12 td.col02 {background: #fc9;}
+
+table.type12 th.col03 {background: #036;}
+
+table.type12 td.col03 {background: #e2eeff;}
+
 
 .tweet-box {
 	width: 780px;

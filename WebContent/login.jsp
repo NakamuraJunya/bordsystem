@@ -6,12 +6,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="./css/login.css" rel="stylesheet" type="text/css">
 	<title>ログイン画面</title>
 </head>
 <body>
-<p><font size="5">商売繁盛掲示板</font></p>
-
-
+<form action="login" method="post"><br />
+  <h1>商売繁盛掲示板</h1>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -23,14 +23,13 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-<form action="login" method="post"><br />
 	<label for="login_id">ログインID</label>
 	<input name="login_id"value="${login_id}" id="login_id"/> <br />
 
 	<label for="password">パスワード</label>
 	<input name="password" type="password" id="password"/> <br />
 	<p></p>
-	<input type="submit" value="ログイン" /> <br />
+	<button>ログイン</button>
 </form>
 <p></p>
 

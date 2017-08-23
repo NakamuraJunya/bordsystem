@@ -141,7 +141,7 @@ public class SettingsServlet extends HttpServlet {
 		if (10<name.length()) {
 			messages.add("名前は10文字以内で入力してください");
 		}
-		if (name == null) {
+		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前は10文字以内で入力してください");
 		}
 		if (!login_id.matches("\\w{6,20}")) {

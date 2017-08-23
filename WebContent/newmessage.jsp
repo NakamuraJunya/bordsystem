@@ -7,19 +7,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<link href="./css/newmessage.css" rel="stylesheet" type="text/css">
 	<title>新規投稿画面</title>
-    <style type="text/css">
-body {
-  background: linear-gradient(to right, gold 0%, orange 100%);/*正規の指定*/
-}
-	</style>
 </head>
 <body>
-<div class="form-area">
-<p><font size="5">新規投稿</font></p>
+<div class="main-contents">
+	<h3><font size="8">新規投稿</font></h3>
 
-<div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -30,9 +24,7 @@ body {
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-</div>
 	<script>
-
 		function check(){
 			if(window.confirm('投稿してもよろしいですか？')){ // 確認ダイアログを表示
 			return true; // 「OK」時は送信を実行
@@ -42,7 +34,6 @@ body {
 			return false; // 送信を中止
 		}
 	}
-
 	</script>
 
 		<script type="text/javascript">
@@ -51,15 +42,15 @@ body {
 			}
 		</script>
 
-<form action="newmessage" method="post" onSubmit="return check()">
-
-<p class="form-item">
+<form action="newmessage" method="post" onSubmit="return check()" style="color:white">
 <label for="title">件名:</label>
-<input maxlength='30' name="title"value="${makeMessage.title}" id="title"/>（30文字以内で入力してください)<br />
+<input maxlength='30' name="title"value="${makeMessage.title}" id="title"/>（30文字以内で入力してください) <br /><br />
 <p></p>
-既存カテゴリー:
+
+ <div class="msr_pulldown_05">
+ 既存カテゴリー:
 	<select name = "category" size="1">
-	<option value="">既存カテゴリー選択</option>
+	<option value=""></option>
     	<c:forEach items="${categoryList}" var="category">
     		<c:if test="${ newMakeMessage == category.category }">
 				<option value="${category.category}" selected>${category.category}</option>
@@ -68,24 +59,23 @@ body {
 				<option value="${category.category}">${category.category}</option>
 			</c:if>
 		</c:forEach>
-	</select>
-<p></p>
+	</select>（すでに存在するものがあれば選択してください）
+</div>
+<p></p><br />
+ <div class="msr_text_05">
 <label for="newcategory">新規カテゴリー:</label>
-<input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）
-<p></p>
+<input maxlength='10' name="newCategory" value = "${makeMessage.category}"id="newCategory"/>（10文字以内で入力してください）</div>
+<p></p><br />
 <label for="text">本文:</label>（1000文字以内で入力してください）
-<br />
+<br /><br />
 <textarea maxlength='1000' name="text" cols="100" rows="5" class="tweet-box" onkeyup="CountDownLength( 'cdlength1' , value , 1000 );">${makeMessage.text}</textarea>
 <p id="cdlength1">残り1000文字</p><br />
 <p></p>
 <button type="submit" value="投稿">投稿</button>
 </form>
-
 <p></p>
 	<a href="./">ホームに戻る</a>
-
-<p></p>
-<p></p>
+	<p></p>
 	</div>
 </body>
 </html>

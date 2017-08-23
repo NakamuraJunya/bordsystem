@@ -7,32 +7,31 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/usermanegement.css" rel="stylesheet" type="text/css">
     <title>ユーザー管理画面</title>
-    <style type="text/css">
-body {
-  background: linear-gradient(to right, gold 0%, orange 100%);/*正規の指定*/
-}
-	</style>
 </head>
 <body>
-	<div id="menu">
-	<ul>
-	<li>	<a href="./">ホーム</a></li>
-	<li>	<a href="signup">ユーザー登録</a></li>
-	</ul>
-	<div class="header">
-	<ul>
-	<li>	<a href="logout">ログアウト</a></li>
-	</ul>
-	</div>
-	</div>
-<p></p>
+<h3><font size="8">ユーザー管理</font></h3>
+
+<div id="menu_box">
+ <c:if test="${loginUser.positionId==1}">
+  <ul class="menu">
+   <li class="drop_3row"><a href="#">メニュー</a>
+      <ul>
+        <li><a href="./">ホーム</a></li>
+        <li><a href="signup">ユーザー登録</a></li>
+        <li><a href="logout">ログアウト</a></li>
+
+      </ul>
+   </li>
+   </ul>
+   </c:if>
+  </div>
 
 	<div class="profile">
 		現在、<span class="name"><c:out value="${loginUser.name}" /> でログイン中です</span>
 	</div>
-
+<div class="center">
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
@@ -43,11 +42,12 @@ body {
 		</div>
 		<c:remove var="errorMessages" scope="session"/>
 	</c:if>
-
-	<font size="5">ユーザー管理</font>
+</div>
 		<div class="main-contents">
 
-	<table border=1>
+	<table class="type12">
+	<thead>
+
 		<tr>
 		<th>【名前】</th>
 		<th>【ログインID】</th>
@@ -75,13 +75,14 @@ body {
 					</c:if>
 				</c:forEach>
 				<td>
+				<div class="button1">
 					<form action = "settings" method = "get" >
-						<button type="submit" name="id" value="${user.id}">編集</button>
+						<button  type="submit" name="id" value="${user.id}">編集</button>
 					</form>
+				</div>
 				</td>
 				<td>
 				<script>
-
 					function check(){
 						if(window.confirm('選択したアカウントを変更してもよろしいですか？')){ // 確認ダイアログを表示
 							return true; // 「OK」時は送信を実行
@@ -91,17 +92,16 @@ body {
 						return false; // 送信を中止
 						}
 					}
-
 				</script>
 				<c:if test="${loginUser.id!=user.id}">
 				<form action = "isworking" method = "post" onSubmit="return check()" >
 	             <c:if test="${user.is_working == 1}">
-					<button type="submit" name=is_working value="${0}">停止</button>
+					<button type="submit"  class ="stop" name=is_working value="${0}">停止</button>
 					<input type = hidden name="id" value="${user.id}">
 				 </c:if>
 
 				 <c:if test="${user.is_working == 0}">
-					<button type="submit" name="is_working" value="${1}">復活</button>
+					<button type="submit" class ="resurrection" name="is_working" value="${1}">復活</button>
 					<input type = hidden name="id" value="${user.id}">
 				 </c:if>
                 </form>
@@ -114,7 +114,7 @@ body {
 		 	 </c:forEach>
 
 		</tr>
-
+		</tbody>
 	</table>
 	<p></p>
 	</div>
