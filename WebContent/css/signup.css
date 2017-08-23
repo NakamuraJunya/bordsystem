@@ -32,10 +32,10 @@ bg-metal-blue {
    position: relative;
 }
 .menu li {
-   width:190px;/*繝｡繝九Η繝ｼ縺ｮ蟷�*/
+   width:190px;
    background:gold;
    position: relative;
-   height:50px;/*繝｡繝九Η繝ｼ縺ｮ鬮倥＆*/
+   height:50px;
 }
 .menu li a {
    text-decoration:none;
@@ -59,16 +59,16 @@ bg-metal-blue {
 .menu li ul li a {
    color:#9e9478;
 }
-.menu .drop_2row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�2縺､縺ｮ縺ｨ縺�*/
+.menu .drop_2row:hover {
    height:150px;
 }
-.menu .drop_3row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�3縺､縺ｮ縺ｨ縺�*/
+.menu .drop_3row:hover {
    height:200px;
 }
-.menu .drop_4row:hover {/*繧ｵ繝悶Γ繝九Η繝ｼ縺�4縺､縺ｮ縺ｨ縺�*/
+.menu .drop_4row:hover {
    height:250px;
 }
-.menu * {/*繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ*/
+.menu * {
    -moz-transition: .5s;
    -webkit-transition: .5s;
    -o-transition: .5s;
@@ -146,7 +146,7 @@ margin: 2em 0 0.5em;
 border-radius: 0 5px 5px 5px;
 }
 
-h2:after {/*ﾆ耽ﾆ置*/
+h2:after {
   position: absolute;
   font-family: FontAwesome,'Quicksand','Avenir','Arial',sans-serif;
   content: '\f00c Check';
