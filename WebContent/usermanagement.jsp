@@ -49,12 +49,12 @@
 	<thead>
 
 		<tr>
-		<th>【名前】</th>
-		<th>【ログインID】</th>
-		<th>【支店名】</th>
-		<th>【部署・役職】</th>
-		<th>【編集項目】</th>
-		<th>【復活・停止】</th>
+		<th>名前</th>
+		<th>ログインID</th>
+		<th>支店名</th>
+		<th>部署・役職</th>
+		<th>編集項目</th>
+		<th>復活・停止</th>
 		</tr>
 		<tr>
 			<c:forEach items="${users}" var="user">

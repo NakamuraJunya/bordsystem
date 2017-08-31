@@ -12,55 +12,54 @@
 	<title>掲示板画面</title>
 </head>
 <body>
-<script>
-function check(){
-	if(window.confirm('選択した内容を削除してもよろしいですか？')){ // 確認ダイアログを表示
-		return true; // 「OK」時は送信を実行
-	}
-	else{ // 「キャンセル」時の処理
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
-		return false; // 送信を中止
-	}
-}
-</script>
-<script type="text/javascript">
-function CountDownLength( idn, str, mnum ) {
-   document.getElementById(idn).innerHTML = "あと" + (mnum - str.length) + "文字";
-}
-</script>
+	<script>
+		function check(){
+			if(window.confirm('選択した内容を削除してもよろしいですか？')){ // 確認ダイアログを表示
+			return true; // 「OK」時は送信を実行
+			}
+			else{ // 「キャンセル」時の処理
+				window.alert('キャンセルされました'); // 警告ダイアログを表示
+				return false; // 送信を中止
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function CountDownLength( idn, str, mnum ) {
+  			 document.getElementById(idn).innerHTML = "あと" + (mnum - str.length) + "文字";
+		}
+	</script>
 
 	<h3><font size="8">商売繁盛掲示板</font></h3>
 
-<div id="menu_box">
- <c:if test="${loginUser.positionId==1}">
-  <ul class="menu">
-   <li class="drop_3row"><a href="#">メニュー</a>
-      <ul>
-        <li><a href="usermanagement">ユーザー管理</a></li>
-        <li><a href="newmessage">新規投稿</a></li>
-        <li><a href="logout">ログアウト</a></li>
-
-      </ul>
-   </li>
-   </ul>
-   </c:if>
-  </div>
- <div id="menu_box">
- <c:if test="${loginUser.positionId!=1}">
-  <ul class="menu">
-   <li class="drop_2row"><a href="#">メニュー</a>
-      <ul>
-        <li><a href="newmessage">新規投稿</a></li>
-        <li><a href="logout">ログアウト</a></li>
-          </ul>
-   </li>
-   </ul>
-   </c:if>
-  </div>
- <div class="profile">
-	<font size="4">	現在、<span class="name"><c:out value="${loginUser.name}" />でログイン中です</span></font>
-</div>
-<div class="center">
+	<div id="menu_box">
+ 		<c:if test="${loginUser.positionId==1}">
+  			<ul class="menu">
+   				<li class="drop_3row"><a href="#">メニュー</a>
+      				<ul>
+        				<li><a href="usermanagement">ユーザー管理</a></li>
+        					<li><a href="newmessage">新規投稿</a></li>
+        						<li><a href="logout">ログアウト</a></li>
+      				</ul>
+   				</li>
+   			</ul>
+   		</c:if>
+  	</div>
+ 	<div id="menu_box">
+ 		<c:if test="${loginUser.positionId!=1}">
+  			<ul class="menu">
+   				<li class="drop_2row"><a href="#">メニュー</a>
+      				<ul>
+        				<li><a href="newmessage">新規投稿</a></li>
+        					<li><a href="logout">ログアウト</a></li>
+          			</ul>
+   				</li>
+   			</ul>
+   		</c:if>
+  	</div>
+ 	<div class="profile">
+		<font size="4">	現在、<span class="name"><c:out value="${loginUser.name}" />でログイン中です</span></font>
+	</div>
+	<div class="center">
 		 <c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
 				<ul>
@@ -71,32 +70,32 @@ function CountDownLength( idn, str, mnum ) {
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-</div>
-<div class="box14">
-	 <p><form action = "./" method = "get"><div class="center"><font size="6" >絞込み検索</font><br/>
+	</div>
+	<div class="box14">
+ <p><form action = "./" method = "get"><div class="center"><font size="6" >絞込み検索</font><br/>
 	<p>
 【カテゴリー検索】:
-<select name = "category" size="1">
-	<option value="">カテゴリーを選択してください</option>
-    	<c:forEach items="${categoryList}" var="category">
-    		<c:if test="${ category.category == selectCatogory}">
-				<option value="${category.category}" selected>${category.category}</option>
-			</c:if>
-			<c:if test="${ category.category != selectCatogory }">
-				<option value="${category.category}">${category.category}</option>
-			</c:if>
-		</c:forEach>
+	<select name = "category" size="1">
+		<option value="">カテゴリーを選択してください</option>
+    		<c:forEach items="${categoryList}" var="category">
+    			<c:if test="${ category.category == selectCatogory}">
+					<option value="${category.category}" selected>${category.category}</option>
+				</c:if>
+					<c:if test="${ category.category != selectCatogory }">
+						<option value="${category.category}">${category.category}</option>
+					</c:if>
+			</c:forEach>
 	</select><br/><br/>
-
 【日付検索】:
-		<label for="startDate"></label>
-		<input type="date" name="startDate" value="${startDate}" />～
+	<label for="startDate"></label>
+		<input type="date" name="startDate" value="${startDate}" min="2017-07-31"  />～
 
-		<label for="endDate"></label>
-		<input type="date" name="endDate" value="${endDate}" /></div>
-<p></p>
+			<label for="endDate"></label>
+				<input type="date" name="endDate" value="${endDate}"  max="endDate"/></div>
+		<p></p>
+
 		<button type="submit" class ="selectbutton" >検索</button>
-<p></p>
+		<p></p>
 	</form>
 	<form action = "./" method = "get"><font size="4"></font>
 		<button type="submit" class ="searchbutton" >全件表示</button>
